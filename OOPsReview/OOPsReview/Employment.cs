@@ -126,6 +126,10 @@
         //Depends on usage, though generally public
         #region Methods
 
+        /// <summary>
+        /// Sets this instances SupervisoryLevel
+        /// </summary>
+        /// <param name="level"> The SupervisoryLevel to set. </param>
         public void SetEmploymentResponsibilityLevel(SupervisoryLevel level)
         {
             Level = level;
@@ -138,10 +142,15 @@
         /// 
         /// Format: Title, Level, MMM,dd,yyyy, Years
         /// </summary>
-        /// <returns></returns>
+        /// <returns> A string in CSV format. </returns>
         public override string ToString()
         {
             return $"{Title},{Level},{StartDate.ToString("MMM,dd,yyyy")},{Years}";
+        }
+
+        public void CorrectStartDate(DateTime startDate)
+        {
+
         }
 
         #endregion
