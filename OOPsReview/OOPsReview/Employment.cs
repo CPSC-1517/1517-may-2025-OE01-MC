@@ -22,7 +22,7 @@
         {
             get { return _Level; }
 
-            set
+            private set
             {
                 if(!Enum.IsDefined(typeof(SupervisoryLevel), value))
                 {
