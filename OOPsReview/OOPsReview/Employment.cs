@@ -148,9 +148,23 @@
             return $"{Title},{Level},{StartDate.ToString("MMM,dd,yyyy")},{Years}";
         }
 
+        /// <summary>
+        /// This method validates our StartDate as no validation is present in the set method.
+        /// </summary>
+        /// <param name="startDate"> The DateTime to set StarteDate to and validate</param>
+        /// <exception cref="ArgumentException"> startDate can not be in the future. </exception>
         public void CorrectStartDate(DateTime startDate)
         {
+            if (startDate >= DateTime.Today.AddDays(1))
+            {
+                throw new ArgumentException($"The start date {startDate} is in the future.");
+            }
 
+            //Else not necessary as the throw will exit my constructor.
+            StartDate = startDate;
+
+            TimeSpan span = DateTime.Now - startDate;
+            Years = Math.Round((span.Days / 365.25), 1); //365.25 accounts for leap years
         }
 
         #endregion
