@@ -56,7 +56,12 @@
          * */
         public Employment(string title, SupervisoryLevel level, DateTime startDate, double years = 0.0)
         {
+            Title= title;
+            Level = level;
 
+            StartDate = startDate;
+
+            Years = years;
         }
         #endregion
 
