@@ -33,7 +33,19 @@
         }
 
         public DateTime StartDate { get; set; }
-        public string Title { get { return _Title; } set { _Title = value; } }
+        public string Title {
+            get { return _Title; }
+            set 
+            {
+                //IsNullOrWhiteSpace checks for any purely whitespace strings.
+                //Is better than IsNullOrEmpty
+                if (String.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentNullException("Title is Required.");
+                }
+                _Title = value;
+            }
+        }
         public double Years { get { return _Years; } set { _Years = value; } }
 
         #endregion
