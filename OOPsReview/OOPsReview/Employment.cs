@@ -131,6 +131,15 @@
             Level = level;
         }
 
+        /// <summary>
+        /// Override ToString. 
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+
+        }
+
         #endregion
     }
 }
