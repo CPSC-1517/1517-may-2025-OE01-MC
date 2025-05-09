@@ -126,6 +126,11 @@
         //Depends on usage, though generally public
         #region Methods
 
+        public void SetEmploymentResponsibilityLevel(SupervisoryLevel level)
+        {
+            Level = level;
+        }
+
         #endregion
     }
 }
