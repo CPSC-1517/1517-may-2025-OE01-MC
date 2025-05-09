@@ -36,6 +36,22 @@
 
         }
 
+        /// <summary>
+        /// Our greedy contructor.
+        /// </summary>
+        /// <param name="title"> Position Title </param>
+        /// <param name="level"> SupervisoryLevel of position </param>
+        /// <param name="startDate"> Position start date </param>
+        /// <param name="years">Years of employment; default 0.0 </param>
+        /// 
+        /* years has a default value, so I can leave it out when calling the contructor if needed. This gives me 2 constructors from 1 definition.
+         * 
+         * Parameters with default values must be declared after those without defaults. I can have as many default parameters as I wish.
+         * */
+        public Employment(string title, SupervisoryLevel level, DateTime startDate, double years = 0.0)
+        {
+
+        }
         #endregion
 
         //Depends on usage, though generally public
