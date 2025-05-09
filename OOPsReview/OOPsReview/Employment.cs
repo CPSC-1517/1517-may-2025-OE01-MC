@@ -34,6 +34,7 @@
         }
 
         public DateTime StartDate { get; set; }
+
         public string Title
         {
             get { return _Title; }
