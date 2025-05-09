@@ -33,7 +33,13 @@
         /// </summary>
         public Employment()
         {
+            //Can not be null or whitespace
+            Title = "Unknown";
 
+            //Years defaults to 0, so no need to implement it here.
+            Level = SupervisoryLevel.Entry;
+
+            StartDate = DateTime.Now;
         }
 
         /// <summary>
