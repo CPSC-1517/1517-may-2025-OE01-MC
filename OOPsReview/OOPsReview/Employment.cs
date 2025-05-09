@@ -132,12 +132,16 @@
         }
 
         /// <summary>
-        /// Override ToString. 
+        /// Override ToString.
+        /// 
+        /// Returns a string representing this instance of Employment as a csv (comma separated value).
+        /// 
+        /// Format: Title, Level, MMM,dd,yyyy, Years
         /// </summary>
         /// <returns></returns>
         public override string ToString()
         {
-
+            return $"{Title},{Level},{StartDate.ToString("MMM,dd,yyyy")},{Years}";
         }
 
         #endregion
