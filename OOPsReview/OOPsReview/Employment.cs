@@ -18,7 +18,20 @@
         //Generally public unless stated otherwise.
         #region Properties
 
-        public SupervisoryLevel Level { get { return _Level; } set { _Level = value; } }
+        public SupervisoryLevel Level {
+            get { return _Level; }
+
+            set
+            {
+                if(!Enum.IsDefined(typeof(SupervisoryLevel), value))
+                {
+                    throw new ArgumentException($"Supervisory Level {value} is invalid.");
+                }
+
+                _Level = value;
+            }
+        }
+
         public DateTime StartDate { get; set; }
         public string Title { get { return _Title; } set { _Title = value; } }
         public double Years { get { return _Years; } set { _Years = value; } }
