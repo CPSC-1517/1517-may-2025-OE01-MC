@@ -18,7 +18,8 @@
         //Generally public unless stated otherwise.
         #region Properties
 
-        public SupervisoryLevel Level {
+        public SupervisoryLevel Level
+        {
             get { return _Level; }
 
             set
@@ -33,7 +34,8 @@
         }
 
         public DateTime StartDate { get; set; }
-        public string Title {
+        public string Title
+        {
             get { return _Title; }
             set 
             {
@@ -46,7 +48,18 @@
                 _Title = value;
             }
         }
-        public double Years { get { return _Years; } set { _Years = value; } }
+        public double Years
+        {
+            get { return _Years; }
+            set 
+            {
+                if(value < 0)
+                {
+                    throw new ArgumentException($"Year value {value} is invalid. Must be non-negative.");
+                }
+                _Years = value;
+            }
+        }
 
         #endregion
 
