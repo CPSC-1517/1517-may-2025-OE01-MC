@@ -17,25 +17,24 @@ namespace OOPsReview
         /// <returns>True if the value is positive, false otherwise.</returns>
         public static bool IsPositive(double value)
         {
-            /*
-            if(value >= 0.0)
-            {
-                return true;
-            }
 
-            return false;
-            */
+            //if(value >= 0.0)
+            //{
+            //    return true;
+            //}
 
-            /*
-            bool valid = false;
+            //return false;
 
-            if(value >= 0.0)
-            {
-                valid = true;
-            }
 
-            return valid;
-            */
+            //bool valid = false;
+
+            //if (value >= 0.0)
+            //{
+            //    valid = true;
+            //}
+
+            //return valid;
+
 
             return value >= 0.0;
         }

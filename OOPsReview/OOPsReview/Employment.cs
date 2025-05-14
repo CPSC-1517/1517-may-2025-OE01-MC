@@ -54,7 +54,7 @@
             get { return _Years; }
             set 
             {
-                if(value < 0)
+                if(Utilities.IsPositive(value))
                 {
                     throw new ArgumentException($"Year value {value} is invalid. Must be non-negative.");
                 }
@@ -170,4 +170,4 @@
         #endregion
     }
 }
-//End of Lesson 1.1
+//End of Lesson 1.3
