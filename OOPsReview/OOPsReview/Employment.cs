@@ -54,7 +54,7 @@
             get { return _Years; }
             set 
             {
-                if(Utilities.IsPositive(value))
+                if(!Utilities.IsPositive(value))
                 {
                     throw new ArgumentException($"Year value {value} is invalid. Must be non-negative.");
                 }
@@ -145,7 +145,7 @@
         /// <returns> A string in CSV format. </returns>
         public override string ToString()
         {
-            return $"{Title},{Level},{StartDate.ToString("MMM,dd,yyyy")},{Years}";
+            return $"{Title},{Level},{StartDate.ToString("MMM. dd yyyy")},{Years}";
         }
 
         /// <summary>
