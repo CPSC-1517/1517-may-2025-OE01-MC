@@ -2,10 +2,35 @@ namespace TDDUnitTesting
 {
     public class PersonShould
     {
-        [Fact]
-        public void Test1()
-        {
+        #region Constructors
 
-        }
+        #region Test
+        #endregion
+
+        #region Theory
+        #endregion
+
+        #endregion
+
+        #region Parameters
+
+        #region Test
+        #endregion
+
+        #region Theory
+        #endregion
+
+        #endregion
+
+        #region Methods
+
+        #region Test
+        #endregion
+
+        #region Theory
+        #endregion
+
+        #endregion
+
     }
 }
