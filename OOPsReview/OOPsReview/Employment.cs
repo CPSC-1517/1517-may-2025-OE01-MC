@@ -100,10 +100,11 @@
         {
             Title= title;
             Level = level;
+            Years = years;
 
             //StartDate can not be in the future
             //This will check if startDate is tomorrow or later.
-            if(startDate >= DateTime.Today.AddDays(1))
+            if (startDate >= DateTime.Today.AddDays(1))
             {
                 throw new ArgumentException($"The start date {startDate} is in the future.");
             }
@@ -111,11 +112,7 @@
             //Else not necessary as the throw will exit my constructor.
             StartDate = startDate;
 
-            if (years > 0.0)
-            {
-                Years = years;
-            }
-            else
+            if (years == 0.0)
             {
                 TimeSpan span = DateTime.Now - startDate;
                 Years = Math.Round((span.Days / 365.25), 1); //365.25 accounts for leap years
