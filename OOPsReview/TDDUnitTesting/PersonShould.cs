@@ -24,7 +24,7 @@ namespace TDDUnitTesting
             sut.LastName.Should().Be(expectedLastName);
             sut.EmploymentPositions.Count().Should().Be(expectedEmploymentPositions);
             sut.Address.Should().BeNull();
-            sut.FullName.Should().Be($"{expectedFirstName} {expectedLastName}");
+            sut.FullName.Should().Be($"{expectedFirstName} {expectedLastName}"); 
         }
 
         #endregion
