@@ -20,7 +20,7 @@ namespace UnitTestingForSystem
 
             //When - Act execution
             Employment actual = new Employment();
-
+             
             //Then - Assert check
             actual.Title.Should().Be(expectedTitle);
             actual.Level.Should().Be(expectedLevel);
