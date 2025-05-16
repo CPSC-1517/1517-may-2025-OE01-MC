@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OOPsReview
 {
-    public record ResidentAddress(int Number, string Street, string City, string Province, string PotalCode)
+    public record ResidentAddress(int Number, string Street, string City, string Province, string PostalCode)
     {
 
 
