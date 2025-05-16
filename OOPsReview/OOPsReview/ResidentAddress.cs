@@ -8,7 +8,9 @@ namespace OOPsReview
 {
     public record ResidentAddress(int Number, string Street, string City, string Province, string PostalCode)
     {
-
-
+        public override string ToString()
+        {
+            return $"{Number},{Street},{City},{Province},{PostalCode}";
+        }
     }
 }
