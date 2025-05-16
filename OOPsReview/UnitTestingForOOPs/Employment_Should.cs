@@ -256,7 +256,7 @@ namespace UnitTestingForSystem
         [InlineData(null)]
         [InlineData("")]
         [InlineData("      ")]
-        public void Directly_Change_Title_Throws__Exception(string title)
+        public void Directly_Change_Title_Throws_Exception(string title)
         {
             //Where - Arrange setup
             string Title = "SAS Lead";
@@ -306,7 +306,6 @@ namespace UnitTestingForSystem
 
             //Then - Assert check
             action.Should().Throw<ArgumentException>().WithMessage("*15*");
-
         }
 
         [Fact]
@@ -325,7 +324,6 @@ namespace UnitTestingForSystem
 
             //Then - Assert check
             action.Should().Throw<ArgumentException>().WithMessage("*future*");
-
         }
         #endregion
     }
