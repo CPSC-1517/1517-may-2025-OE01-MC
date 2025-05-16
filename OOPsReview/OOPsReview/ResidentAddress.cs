@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OOPsReview
 {
-    internal class ResidentAddress
+    public record ResidentAddress
     {
     }
 }
