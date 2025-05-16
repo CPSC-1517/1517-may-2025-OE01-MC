@@ -1,10 +1,32 @@
+using FluentAssertions;
+using OOPsReview;
+
 namespace TDDUnitTesting
 {
     public class PersonShould
     {
         #region Constructors
 
-        #region Test
+        #region Fact
+        [Fact]
+        public void CreateAnInstanceWithDefaultConstructor()
+        {
+            //Setup
+            string expectedFirstName = "Unknown";
+            string expectedLastName = "Unknown";
+            int expectedEmploymentPositions = 0;
+
+            //Execution
+            Person sut = new Person();
+
+            //Assertion
+            sut.FirstName.Should().Be(expectedFirstName);
+            sut.LastName.Should().Be(expectedLastName);
+            sut.EmploymentPositions.Count().Should().Be(expectedEmploymentPositions);
+            sut.Address.Should().BeNull();
+            sut.FullName.Should().Be($"{expectedFirstName} {expectedLastName}");
+        }
+
         #endregion
 
         #region Theory
@@ -14,7 +36,7 @@ namespace TDDUnitTesting
 
         #region Parameters
 
-        #region Test
+        #region Fact
         #endregion
 
         #region Theory
@@ -24,7 +46,7 @@ namespace TDDUnitTesting
 
         #region Methods
 
-        #region Test
+        #region Fact
         #endregion
 
         #region Theory
