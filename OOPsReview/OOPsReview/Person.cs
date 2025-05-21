@@ -16,6 +16,7 @@ namespace OOPsReview
         public ResidentAddress Address { get; set; }
         public List<Employment> EmploymentPositions { get; set; }
 
+
         public string FirstName
         { 
             get { return _FirstName; }
