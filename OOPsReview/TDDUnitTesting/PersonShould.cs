@@ -24,7 +24,26 @@ namespace TDDUnitTesting
             sut.LastName.Should().Be(expectedLastName);
             sut.EmploymentPositions.Count().Should().Be(expectedEmploymentPositions);
             sut.Address.Should().BeNull();
-            sut.FullName.Should().Be($"{expectedFirstName} {expectedLastName}"); 
+            sut.FullName.Should().Be($"{expectedFirstName} {expectedLastName}");
+        }
+
+        [Fact]
+        public void CreateAnInstanceWithGreedyConstructor()
+        {
+            //Setup
+            string expectedFirstName = "Jeff";
+            string expectedLastName = "Bridges";
+            int expectedEmploymentPositions = 0;
+
+            //Execution
+            Person sut = new Person("Jeff", "Bridges", null, null);
+
+            //Assertion
+            sut.FirstName.Should().Be(expectedFirstName);
+            sut.LastName.Should().Be(expectedLastName);
+            sut.EmploymentPositions.Count().Should().Be(expectedEmploymentPositions);
+            sut.Address.Should().BeNull();
+            sut.FullName.Should().Be($"{expectedFirstName} {expectedLastName}");
         }
 
         #endregion
