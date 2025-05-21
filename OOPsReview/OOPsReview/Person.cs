@@ -45,7 +45,21 @@ namespace OOPsReview
             EmploymentPositions = new List<Employment>();
         }
 
+        public Person(string firstName, string lastName,  ResidentAddress address, List<Employment> positions)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Address = address;
 
+            if (positions != null)
+            {
+                EmploymentPositions = positions;
+            }
+            else
+            {
+                EmploymentPositions = new List<Employment>();
+            }
+        }
 
         #endregion
     }
