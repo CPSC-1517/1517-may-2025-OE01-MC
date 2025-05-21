@@ -47,6 +47,7 @@ namespace OOPsReview
 
         public Person(string firstName, string lastName,  ResidentAddress address, List<Employment> positions)
         {
+
             FirstName = firstName;
             LastName = lastName;
             Address = address;
