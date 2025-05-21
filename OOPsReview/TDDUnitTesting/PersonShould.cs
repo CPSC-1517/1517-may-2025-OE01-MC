@@ -64,6 +64,13 @@ namespace TDDUnitTesting
             action.Should().Throw<ArgumentException>();
         }
 
+
+        //ToDo:
+        // Write theory test for Greedy constructor w/ bad LastName
+        // Write fact test for Attribute w/ good FirstName
+        // Write fact test for Attribute w/ good LastName
+        // Write theory test for Attribute w/ bad FirstName
+        // Write theory test for Attribute w/ bad LastName
         #endregion
 
         #endregion
