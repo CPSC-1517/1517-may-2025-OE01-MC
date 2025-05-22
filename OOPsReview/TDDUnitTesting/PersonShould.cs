@@ -64,13 +64,24 @@ namespace TDDUnitTesting
             action.Should().Throw<ArgumentException>();
         }
 
-
-        //ToDo:
         // Write theory test for Greedy constructor w/ bad LastName
-        // Write fact test for Attribute w/ good FirstName
-        // Write fact test for Attribute w/ good LastName
-        // Write theory test for Attribute w/ bad FirstName
-        // Write theory test for Attribute w/ bad LastName
+        [Theory]
+        [InlineData("   ")]
+        [InlineData(null)]
+        [InlineData("")]
+        public void ThrowExceptionCreatingAnInstanceWithBadLastName(string? testValue)
+        {
+            //No setup needed.
+
+            //Execution
+            Action action = () => new Person("First", testValue, null, null);
+
+            //Assertion
+            action.Should().Throw<ArgumentException>();
+        }
+
+        //TODO: Greedy full name
+
         #endregion
 
         #endregion
@@ -78,9 +89,66 @@ namespace TDDUnitTesting
         #region Parameters
 
         #region Fact
+        // Write fact test for Attribute w/ good FirstName
+        [Fact]
+        public void DirectlyChangeFirstNameViaProperty()
+        {
+            string expectedFirstName = "Bob";
+
+            Person sut = new Person("Dave", "Bowie", null, null);
+
+            sut.FirstName = "Bob";
+
+            sut.FirstName.Should().Be(expectedFirstName);
+        }
+
+        // Write fact test for Attribute w/ good LastName
+        [Fact]
+        public void DirectlyChangeLastNameViaProperty()
+        {
+            string expectedLastName = "Smith";
+
+            Person sut = new Person("Dave", "Bowie", null, null);
+
+            sut.LastName = "Smith";
+
+            sut.LastName.Should().Be(expectedLastName);
+        }
+
+        //TODO: Change address
+
         #endregion
 
         #region Theory
+
+        // Write theory test for Attribute w/ bad FirstName
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData("    ")]
+        public void ThrowExceptionWhenDirectlyChangingFirstNameWithBadData(string testValue)
+        {
+            Person sut = new Person("Lowan", "Behold", null, null);
+
+            Action action = () => sut.FirstName = testValue;
+
+            action.Should().Throw<ArgumentException>();
+        }
+
+        // Write theory test for Attribute w/ bad LastName
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData("    ")]
+        public void ThrowExceptionWhenDirectlyChangingLastNameWithBadData(string testValue)
+        {
+            Person sut = new Person("Lowan", "Behold", null, null);
+
+            Action action = () => sut.LastName = testValue;
+
+            action.Should().Throw<ArgumentException>();
+        }
+
         #endregion
 
         #endregion
