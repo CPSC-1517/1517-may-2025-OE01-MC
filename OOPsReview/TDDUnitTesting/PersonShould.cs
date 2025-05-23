@@ -197,6 +197,22 @@ namespace TDDUnitTesting
         #region Methods
 
         #region Fact
+
+        [Fact]
+        public void ChangeFullName()
+        {
+            string expectedFirstName = "Remi";
+            string expectedLastName = "The Rat";
+            string extectedFullName = "The Rat, Remi";
+
+            Person sut = new Person("Mickey", "Mouse", null, null);
+
+            sut.ChangeFullName("Remi", "The Rat");
+
+            sut.FirstName.Should().Be(expectedFirstName);
+            sut.LastName.Should().Be(expectedLastName);
+            sut.FullName.Should().Be(extectedFullName);
+        }
         #endregion
 
         #region Theory
