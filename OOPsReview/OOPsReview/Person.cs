@@ -87,7 +87,10 @@ namespace OOPsReview
 
         #region Methods
 
+        public void ChangeFullName(string firstName, string secondName)
+        {
 
+        }
 
         #endregion
     }
