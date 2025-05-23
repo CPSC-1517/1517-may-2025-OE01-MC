@@ -81,6 +81,24 @@ namespace TDDUnitTesting
         }
 
         //TODO: Greedy full name
+        [Theory]
+        [InlineData("   ", "Last")]
+        [InlineData(null, "Last")]
+        [InlineData("", "Last")]
+        [InlineData("First", "   ")]
+        [InlineData("First", null)]
+        [InlineData("First", "")]
+        public void ThrowExceptionCreatingAnInstanceWithBadFullName(string? firstValue, string? lastValue)
+        {
+            //No setup needed.
+
+            //Execution
+            Action action = () => new Person(firstValue, lastValue, null, null);
+
+            //Assertion
+            action.Should().Throw<ArgumentException>();
+        }
+
 
         #endregion
 
