@@ -36,7 +36,17 @@ namespace OOPsReview
         public string LastName
         {
             get { return _LastName; }
-            set { _LastName = value; }
+            set
+            {
+                //Guard Statement - Causes a function to exit early when there is bad data.
+                if (String.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException($"{value} is invalid. Last Name is Required; can not be null, empty, or whitespace.");
+                }
+
+                //Always trim your strings.
+                _LastName = value.Trim();
+            }
         }
 
         public string FullName

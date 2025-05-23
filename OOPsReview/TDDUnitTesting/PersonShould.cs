@@ -134,6 +134,29 @@ namespace TDDUnitTesting
         }
 
         //TODO: Change address
+        //These two tests could be replaced with a Theory test that has both address values.
+        [Fact]
+        public void DirectlyChangeAddressViaProperty()
+        {
+            ResidentAddress expectedAddress = new ResidentAddress(321, "Ash Lane", "Edmonton", "AB", "E4R5T6");
+
+            Person sut = new Person("Don", "Welch", new ResidentAddress(123, "Maple St", "Edmonton", "AB", "Y7U8I9"), null);
+
+            sut.Address = new ResidentAddress(321, "Ash Lane", "Edmonton", "AB", "E4R5T6");
+
+            sut.Address.Should().Be(expectedAddress);
+        }
+
+        [Fact]
+        public void DirectlyChangeAddressToEmptyViaProperty()
+        {
+
+            Person sut = new Person("Don", "Welch", new ResidentAddress(123, "Maple St", "Edmonton", "AB", "Y7U8I9"), null);
+
+            sut.Address = null;
+
+            sut.Address.Should().BeNull();
+        }
 
         #endregion
 
