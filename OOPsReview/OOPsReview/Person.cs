@@ -51,7 +51,7 @@ namespace OOPsReview
 
         public string FullName
         {
-            get { return $"{FirstName} {LastName}"; } 
+            get { return $"{LastName}, {FirstName}"; } 
         }
 
         #endregion
