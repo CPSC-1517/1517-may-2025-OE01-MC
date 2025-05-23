@@ -89,7 +89,8 @@ namespace OOPsReview
 
         public void ChangeFullName(string firstName, string secondName)
         {
-
+            FirstName = firstName;
+            LastName = secondName;
         }
 
         #endregion
