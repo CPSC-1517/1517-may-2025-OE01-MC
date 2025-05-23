@@ -102,7 +102,6 @@ namespace OOPsReview
 
             EmploymentPositions.Add(employment);
         }
-
         #endregion
     }
 }
