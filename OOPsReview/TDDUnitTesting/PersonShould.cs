@@ -213,6 +213,45 @@ namespace TDDUnitTesting
             sut.LastName.Should().Be(expectedLastName);
             sut.FullName.Should().Be(extectedFullName);
         }
+
+        [Fact]
+        public void AddNewEmploymentItemToCollection()
+        {
+            Employment one = new Employment("PG I", SupervisoryLevel.TeamMember, DateTime.Parse("2013/10/04"), 6.5);
+            Employment two = new Employment("PG II", SupervisoryLevel.TeamMember, DateTime.Parse("2020/04/04"), 3);
+
+            List<Employment> employments = new List<Employment>();
+            employments.Add(one);
+            employments.Add(two);
+
+            Person sut = new Person("Lowan", "Behold", null, employments);
+
+            Employment three = new Employment("SUP I", SupervisoryLevel.Supervisor, DateTime.Today, 0);
+
+            List<Employment> expectedEmployments = new List<Employment>();
+            expectedEmployments.Add(one);
+            expectedEmployments.Add(two);
+            expectedEmployments.Add(three);
+
+            int expectedEmploymentPositionCount = 3;
+
+            //Execution
+            sut.AddEmployment(three);
+
+            //Assertion
+            sut.EmploymentPositions.Count.Should().Be(expectedEmploymentPositionCount); //Tells me that a 3rd item was added.
+            sut.EmploymentPositions.Should().ContainInConsecutiveOrder(expectedEmployments); //Tests that my list order matches my expected order.
+        }
+
+        [Fact]
+        public void ThrowExceptionWhenAddingEmploymentWithNoParameter()
+        {
+            Person sut = new Person("Jean-Luc", "Picard", null, null);
+
+            Action action = () => sut.AddEmployment(null);
+
+            action.Should().Throw<ArgumentNullException>().WithMessage("*is required*");
+        }
         #endregion
 
         #region Theory

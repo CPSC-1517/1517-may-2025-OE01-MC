@@ -93,6 +93,16 @@ namespace OOPsReview
             LastName = secondName;
         }
 
+        public void AddEmployment(Employment employment)
+        {
+            if(employment == null)
+            {
+                throw new ArgumentNullException("An Employment is required. Can not be null.");
+            }
+
+            EmploymentPositions.Add(employment);
+        }
+
         #endregion
     }
 }
