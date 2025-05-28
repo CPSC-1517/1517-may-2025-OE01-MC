@@ -113,6 +113,7 @@ foreach (var employment in foundCollection)
 
 #endregion
 
+
 #region Helper Functions
 
 static List<Employment> CreateCollection()
