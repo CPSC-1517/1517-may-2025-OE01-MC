@@ -83,6 +83,34 @@ foundEmployment = null;
 
 #region LINQ
 
+Console.WriteLine("\n--LINQ Section--");
+
+//Much like inbuilt methods, LINQ are 1 line
+
+List<Employment>? foundCollection = null;
+
+foundCollection = employments.Where(e => e.Title.Contains("PG")).ToList();
+
+foreach (var employment in foundCollection)
+{
+    TestForFoundItem(employment, "PG");
+}
+
+foundCollection = null;
+
+//As SQL
+foundCollection =
+    (
+        from employment in employments
+        where employment.Title.Contains("PG")
+        select employment
+    ).ToList();
+
+foreach (var employment in foundCollection)
+{
+    TestForFoundItem(employment, "PG");
+}
+
 #endregion
 
 #region Helper Functions
