@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestingForOOPs", "UnitT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TDDUnitTesting", "TDDUnitTesting\TDDUnitTesting.csproj", "{9A02776F-A4AD-478D-B0B0-4C1C90515CE2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectionQuery", "CollectionQuery\CollectionQuery.csproj", "{8BEDFE35-8500-487B-A110-E726CEDEC389}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{9A02776F-A4AD-478D-B0B0-4C1C90515CE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A02776F-A4AD-478D-B0B0-4C1C90515CE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A02776F-A4AD-478D-B0B0-4C1C90515CE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BEDFE35-8500-487B-A110-E726CEDEC389}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BEDFE35-8500-487B-A110-E726CEDEC389}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BEDFE35-8500-487B-A110-E726CEDEC389}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BEDFE35-8500-487B-A110-E726CEDEC389}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
