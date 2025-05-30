@@ -1,0 +1,60 @@
+﻿@page "/button-events"
+@rendermode InteractiveServer
+
+<!--This enables buttons to trigger and call C# functions.-->
+
+
+<PageTitle>Button Events</PageTitle>
+
+<header>
+	<h1>Basic Button Events</h1>
+	<p>Learning about buttons and events!</p>
+</header>
+<body>
+	<!--This is generally bad, but very common in Blazor examples. We're going to learn the correct way to add CSS a little later.-->
+	<style>
+		blockquote{
+		background-color: aqua;
+		}
+	</style>
+
+	<blockquote>
+		This page will demonstrate the basics of button events. It will use &lt;input&gt; controls to ask for some user input. It will use a &lt;button&gt; control to process the input. It will demonstrate basice use of C# code to do the processing.
+	</blockquote>
+
+	<p>@WelcomeMessage</p>
+
+	<style>
+		button,
+		label,
+		input{
+			display: block;
+			margin-bottom: 15px;
+		}
+	</style>
+
+	<div>
+		<button type="submit" @onclick="Reset">Reset</button>
+
+		<label for="inputcontrol">Enter an H for heads or T for Tails:</label>
+		<input type="text" id="inputcontrol" placeholder="eg: H" @bind="InputValue"/>
+		<button type="submit" @onclick="PlayGame">Play!</button>
+	</div>
+
+</body>
+@code {
+
+	private string WelcomeMessage = "Let us get started!";
+
+	private string InputValue = string.Empty;
+
+	private void Reset()
+	{
+		WelcomeMessage = "Reset by button!";
+	}
+
+	private void PlayGame()
+	{
+		
+	}
+}
