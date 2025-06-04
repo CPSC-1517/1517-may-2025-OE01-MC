@@ -6,12 +6,10 @@
 
 <PageTitle>Button Events</PageTitle>
 
-<header>
 	<h1>Basic Button Events</h1>
 	<p>Learning about buttons and events!</p>
-</header>
 
-<body>
+
 	<!--This is generally bad, but very common in Blazor examples. We're going to learn the correct way to add CSS a little later.-->
 
 
@@ -29,7 +27,6 @@
 		<button type="submit" @onclick="PlayGame">Play!</button>
 	</div>
 
-</body>
 @code {
 
 	private string WelcomeMessage = "Let us get started!";
@@ -43,6 +40,51 @@
 
 	private void PlayGame()
 	{
-		
+		Random rnd = new Random();
+
+		int flip = rnd.Next(0, 2);
+
+		WelcomeMessage = String.Empty; //roughly equivalent to ""
+
+		string guess = InputValue.ToUpper().Trim(); //Makes it easier to compare
+
+		switch (flip)
+		{
+			case 0: //heads
+				{
+					if (guess == "H")
+					{
+						WelcomeMessage = "You guessed correctly, it's Heads!";
+					}
+					else if (guess == "T")
+					{
+						WelcomeMessage = "You guessed incorrectly!";
+					}
+					else
+					{
+						WelcomeMessage = $"{guess} was invalid, please enter H or T.";
+					}
+				}
+				break;
+
+			case 1: //Tails
+				{
+					if (guess == "T")
+					{
+						WelcomeMessage = "You guessed correctly, it's Tails!";
+					}
+					else if (guess == "H")
+					{
+						WelcomeMessage = "You guessed incorrectly!";
+					}
+					else
+					{
+						WelcomeMessage = $"{guess} was invalid, please enter H or T.";
+					}
+				}
+				break;
+
+			default: break;
+		}
 	}
 }
