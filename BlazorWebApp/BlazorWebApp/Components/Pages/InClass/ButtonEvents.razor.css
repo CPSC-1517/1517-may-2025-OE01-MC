@@ -1,2 +1,10 @@
-﻿body {
+﻿blockquote {
+    background-color: aqua;
+}
+
+button,
+label,
+input {
+    display: block;
+    margin-bottom: 15px;
 }

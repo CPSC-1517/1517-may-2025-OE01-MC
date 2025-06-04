@@ -13,26 +13,13 @@
 
 <body>
 	<!--This is generally bad, but very common in Blazor examples. We're going to learn the correct way to add CSS a little later.-->
-	<style>
-		blockquote{
-		background-color: aqua;
-		}
-	</style>
+
 
 	<blockquote>
 		This page will demonstrate the basics of button events. It will use &lt;input&gt; controls to ask for some user input. It will use a &lt;button&gt; control to process the input. It will demonstrate basice use of C# code to do the processing.
 	</blockquote>
 
 	<p>@WelcomeMessage</p>
-
-	<style>
-		button,
-		label,
-		input{
-			display: block;
-			margin-bottom: 15px;
-		}
-	</style>
 
 	<div>
 		<button type="submit" @onclick="Reset">Reset</button>
