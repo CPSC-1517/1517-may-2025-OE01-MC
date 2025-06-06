@@ -64,7 +64,7 @@
 		</div>
 		<div class="col-md-2">
 			<!--step sets how our number increments when using the buttons-->
-			<input type="number" id="years" @bind=EmploymentYears step="0.1"/>
+			<input type="number" id="years" @bind=EmploymentYears step="0.1" min="0"/>
 		</div>
 	</div>
 
@@ -118,9 +118,36 @@
 	DateTime EmploymentStart = DateTime.Today;
 	SupervisoryLevel EmploymentLevel = SupervisoryLevel.Entry;
 
+	/// <summary>
+	/// Checks all of our fields for errors.
+	/// </summary>
 	private void Submit()
 	{
+		//Set up a clean slate for communicating with our users
+		FeedbackMsg = String.Empty;
+		ErrorMsgs.Clear();
 
+		if (String.IsNullOrWhiteSpace(EmploymentTitle))
+		{
+			ErrorMsgs.Add("Title", "Title can not be empty.");
+		}
+
+		if (EmploymentYears < 0)
+		{
+			ErrorMsgs.Add("Year", "Years can not be negative.");
+		}
+
+		if (EmploymentStart >= DateTime.Today.AddDays(1))
+		{
+			ErrorMsgs.Add("Start", "Start Date can not be in the future.");
+		}
+
+		//Do not need to check EmploymentLevel as there is no functional way to pass in bad data
+
+		if(ErrorMsgs.Count == 0)
+		{
+			FeedbackMsg = $"Success: {EmploymentTitle}, {EmploymentYears}, {EmploymentStart}, {EmploymentLevel}";
+		}
 	}
 
 	/// <summary>
