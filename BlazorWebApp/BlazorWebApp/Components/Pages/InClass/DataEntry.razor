@@ -91,7 +91,7 @@
 
 					Enum.GetValues returns a list of our values I can iterate through
 			*@
-			<select>
+			<select id="level" @bind=EmploymentLevel>
 				@foreach(var level in Enum.GetValues(typeof(SupervisoryLevel)))
 				{
 					<option value="@level">@level</option>
@@ -118,4 +118,22 @@
 	DateTime EmploymentStart = DateTime.Today;
 	SupervisoryLevel EmploymentLevel = SupervisoryLevel.Entry;
 
+	private void Submit()
+	{
+
+	}
+
+	/// <summary>
+	/// Resets all of our fields to default values.
+	/// </summary>
+	private void Clear()
+	{
+		FeedbackMsg = String.Empty;
+		ErrorMsgs.Clear();
+
+		EmploymentTitle = String.Empty;
+		EmploymentYears = 0.0;
+		EmploymentStart = DateTime.Today;
+		EmploymentLevel = SupervisoryLevel.Entry;
+	}
 }
