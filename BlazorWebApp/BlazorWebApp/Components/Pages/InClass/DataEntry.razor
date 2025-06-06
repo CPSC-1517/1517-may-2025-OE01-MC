@@ -54,7 +54,6 @@
 			<label for="title">Position Title</label>
 		</div>
 		<div class="col-md-2">
-			<!--step sets how our number increments when using the buttons-->
 			<input type="text" id="title" @bind=EmploymentTitle placeholder="Enter Position" />
 		</div>
 	</div>
@@ -66,6 +65,45 @@
 		<div class="col-md-2">
 			<!--step sets how our number increments when using the buttons-->
 			<input type="number" id="years" @bind=EmploymentYears step="0.1"/>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-2">
+			<label for="date">Position Start Date</label>
+		</div>
+		<div class="col-md-2">
+			<input type="date" id="date" @bind=EmploymentStart placeholder="@DateTime.Today" />
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-2">
+			<label for="level">Supervisory Level</label>
+		</div>
+		<div class="col-md-2">
+			@*
+				I could do this next part manually:
+				<option>Entry<option>
+					etc.
+
+					or....
+
+					Enum.GetValues returns a list of our values I can iterate through
+			*@
+			<select>
+				@foreach(var level in Enum.GetValues(typeof(SupervisoryLevel)))
+				{
+					<option value="@level">@level</option>
+				}
+			</select>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-2">
+			<button @onclick="Submit">Submit</button>
+			<button @onclick="Clear">Clear</button>
 		</div>
 	</div>
 </fieldset>
