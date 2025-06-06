@@ -46,9 +46,38 @@
 	</div>
 }
 
+<fieldset>
+	<legend>Employment Data</legend>
+
+	<div class="row">
+		<div class="col-md-2">
+			<label for="title">Position Title</label>
+		</div>
+		<div class="col-md-2">
+			<!--step sets how our number increments when using the buttons-->
+			<input type="text" id="title" @bind=EmploymentTitle placeholder="Enter Position" />
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-2">
+			<label for="years">Years in position</label>
+		</div>
+		<div class="col-md-2">
+			<!--step sets how our number increments when using the buttons-->
+			<input type="number" id="years" @bind=EmploymentYears step="0.1"/>
+		</div>
+	</div>
+</fieldset>
+
 @code {
 
 	string FeedbackMsg = String.Empty;
 	Dictionary<string, string> ErrorMsgs = new();//same as new Dictionary<string, string>();
+
+	string EmploymentTitle = String.Empty;
+	double EmploymentYears = 0.0;
+	DateTime EmploymentStart = DateTime.Today;
+	SupervisoryLevel EmploymentLevel = SupervisoryLevel.Entry;
 
 }
