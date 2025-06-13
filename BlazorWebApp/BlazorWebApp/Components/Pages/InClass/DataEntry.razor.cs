@@ -67,7 +67,7 @@ namespace BlazorWebApp.Components.Pages.InClass
                     //I could use string line = my content to write. Good if you have lots of data.
 
                     //Write data to file
-                    System.IO.File.AppendAllText(filePath, EmploymentData.ToString() + "/n");
+                    System.IO.File.AppendAllText(filePath, EmploymentData.ToString() + "\n");
                 }
                 //From EmploymentData or File path
                 catch (ArgumentNullException ex)
