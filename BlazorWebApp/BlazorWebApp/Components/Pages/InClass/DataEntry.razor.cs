@@ -59,10 +59,15 @@ namespace BlazorWebApp.Components.Pages.InClass
                     //Absolute path to my wwwroot folder
                     string appPathName = WebHostEnvironment.ContentRootPath;
 
-                    //Absolute pate to my file
+                    //Absolute path to my file
                     //The folder needs to exist but the file doesn't
-                    //The @ symbol allows me to treay / as a / instead of as a special character
+                    //The @ symbol allows me to treat / as a / instead of as a special character
                     string filePath = $@"{appPathName}/Data/Employment.csv";
+
+                    //I could use string line = my content to write. Good if you have lots of data.
+
+                    //Write data to file
+                    System.IO.File.AppendAllText(filePath, EmploymentData.ToString());
                 }
 
                 catch
