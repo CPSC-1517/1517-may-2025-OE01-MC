@@ -60,6 +60,9 @@ namespace BlazorWebApp.Components.Pages.InClass
                     string appPathName = WebHostEnvironment.ContentRootPath;
 
                     //Absolute pate to my file
+                    //The folder needs to exist but the file doesn't
+                    //The @ symbol allows me to treay / as a / instead of as a special character
+                    string filePath = $@"{appPathName}/Data/Employment.csv";
                 }
 
                 catch
