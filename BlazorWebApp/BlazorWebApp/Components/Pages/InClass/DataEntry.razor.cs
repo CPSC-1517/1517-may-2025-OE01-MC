@@ -69,10 +69,20 @@ namespace BlazorWebApp.Components.Pages.InClass
                     //Write data to file
                     System.IO.File.AppendAllText(filePath, EmploymentData.ToString());
                 }
-
-                catch
+                //From EmploymentData or File path
+                catch (ArgumentNullException ex)
                 {
-                
+                    ErrorMsgs.Add($"Missing Data", GetInnerException(ex).Message);
+                }
+                //From EmploymentData
+                catch (ArgumentException ex)
+                {
+                    ErrorMsgs.Add($"Bad Data", GetInnerException(ex).Message);
+                }
+                //Everything else, most will end up being File IO issues
+                catch (Exception ex)
+                {
+                    ErrorMsgs.Add($"System Error", GetInnerException(ex).Message);
                 }
 
                 FeedbackMsg = $"Success: {EmploymentTitle}, {EmploymentYears}, {EmploymentStart}, {EmploymentLevel}";
@@ -91,6 +101,21 @@ namespace BlazorWebApp.Components.Pages.InClass
             EmploymentYears = 0.0;
             EmploymentStart = DateTime.Today;
             EmploymentLevel = SupervisoryLevel.Entry;
+        }
+
+        /// <summary>
+        /// Returns the deepest nested exception.
+        /// </summary>
+        /// <param name="ex">The exception to check.</param>
+        /// <returns></returns>
+        private Exception GetInnerException(Exception ex)
+        {
+            while (ex.InnerException != null)
+            {
+                ex = ex.InnerException;
+            }
+
+            return ex;
         }
 
         //End of 3.4
