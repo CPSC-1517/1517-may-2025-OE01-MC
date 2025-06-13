@@ -49,6 +49,24 @@ namespace BlazorWebApp.Components.Pages.InClass
 
             if (ErrorMsgs.Count == 0)
             {
+                //File IO goes here
+                try
+                {
+                    EmploymentData = new Employment(EmploymentTitle, EmploymentLevel, EmploymentStart, EmploymentYears);
+
+                    //File IO needs a path
+
+                    //Absolute path to my wwwroot folder
+                    string appPathName = WebHostEnvironment.ContentRootPath;
+
+                    //Absolute pate to my file
+                }
+
+                catch
+                {
+                
+                }
+
                 FeedbackMsg = $"Success: {EmploymentTitle}, {EmploymentYears}, {EmploymentStart}, {EmploymentLevel}";
             }
         }
