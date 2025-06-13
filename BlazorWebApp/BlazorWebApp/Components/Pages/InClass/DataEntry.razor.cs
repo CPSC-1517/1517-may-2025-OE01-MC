@@ -1,4 +1,5 @@
 ﻿using OOPsReview;
+using Microsoft.AspNetCore.Components;
 
 namespace BlazorWebApp.Components.Pages.InClass
 {
@@ -11,6 +12,14 @@ namespace BlazorWebApp.Components.Pages.InClass
         double EmploymentYears = 0.0;
         DateTime EmploymentStart = DateTime.Today;
         SupervisoryLevel EmploymentLevel = SupervisoryLevel.Entry;
+
+        Employment EmploymentData;
+
+        //Dependency Injection
+
+        //Gives access to our Web Host (Browser) to determine where our application is running
+        [Inject]
+        IWebHostEnvironment WebHostEnvironment { get; set; }
 
         /// <summary>
         /// Checks all of our fields for errors.
