@@ -96,6 +96,7 @@ namespace BlazorWebApp.Components.Pages.InClass
 
         /// <summary>
         /// Resets all of our fields to default values.
+        /// Returns a Task so that it can return correctly.
         /// </summary>
         private async Task Clear()
         {
@@ -128,7 +129,5 @@ namespace BlazorWebApp.Components.Pages.InClass
 
             return ex;
         }
-
-        //End of 3.4
     }
 }
