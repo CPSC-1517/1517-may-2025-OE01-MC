@@ -164,6 +164,21 @@
             Years = Math.Round((span.Days / 365.25), 1); //365.25 accounts for leap years
         }
 
+        public static Employment Parse(string csvData)
+        {
+            List<string> data = csvData.Split(',').ToList();
+
+            string title = data[0];
+
+            SupervisoryLevel level = Enum.Parse<SupervisoryLevel>(data[1]);
+
+            DateTime startDate = DateTime.Parse(data[2]);
+
+            double years = Double.Parse(data[3]);
+
+            return new Employment(title, level, startDate, years);
+        }
+
         #endregion
     }
 }

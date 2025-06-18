@@ -21,6 +21,42 @@ namespace BlazorWebApp.Components.Pages.InClass
         /// </summary>
         private void ReadAndParseCSV()
         {
+            FeedbackMsg = String.Empty;
+            ErrorMsgs.Clear();
+
+            //File setup
+            string FolderName = @"./Data/"; //Relative path to the root of our application
+            string FileName = "Employment.csv";
+
+            string FilePath = FolderName + FileName;
+
+            List<string> Lines = new();
+
+            //File Reading
+            try
+            {
+                if (File.Exists(FilePath))
+                {
+                    Lines = File.ReadAllLines(FilePath).ToList();
+
+                    Employments = new();
+
+                    foreach (string line in Lines)
+                    {
+                        Employments.Add(Employment.Parse(line));
+                    }
+                }
+                else
+                {
+                    throw new Exception($"File: {FilePath} does not exist.");
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMsgs.Add($"System Error: {GetInnerException(ex).Message}");
+            }
+
+            FeedbackMsg = $"Date parsed from {FilePath} successfully!";
 
         }
 
