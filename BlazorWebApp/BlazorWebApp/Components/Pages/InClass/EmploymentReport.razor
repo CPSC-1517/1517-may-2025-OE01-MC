@@ -9,14 +9,14 @@
 <h3>EmploymentReport</h3>
 <p>Using a tabular report presentation AKA Tables</p>
 
-@if {FeedbackMsg.Length > 0}
+@if (FeedbackMsg.Length > 0)
 {
 	<div class="alert alert-info">
 		<p>@FeedbackMsg</p>
 	</div>
 }
 
-@if {ErrorMsgs.Count > 0}
+@if (ErrorMsgs.Count > 0)
 {
 	<div class="alert alert-danger">
 		<p>Please fix these errors:</p>
@@ -28,3 +28,4 @@
 		</ul>
 	</div>
 }
+
