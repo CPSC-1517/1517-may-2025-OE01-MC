@@ -9,7 +9,20 @@ namespace BlazorWebApp.Components.Pages.InClass
 
         List<Employment> Employments = new();
 
+        protected override void OnInitialized()
+        {
+            ReadAndParseCSV();
 
+            base.OnInitialized();
+        }
+
+        /// <summary>
+        /// Reads and Parses our CSV file to import into our table
+        /// </summary>
+        private void ReadAndParseCSV()
+        {
+
+        }
 
         /// <summary>
         /// Returns the deepest nested exception.
