@@ -26,6 +26,10 @@ namespace BlazorWebApp.Components.Pages.InClass
         [Inject]
         IJSRuntime JSRuntime { get; set; }
 
+        //Allows for various URI and Navigation related functions
+        [Inject]
+        NavigationManager NavManager { get; set; }
+
         /// <summary>
         /// Checks all of our fields for errors.
         /// </summary>
@@ -113,6 +117,16 @@ namespace BlazorWebApp.Components.Pages.InClass
                 EmploymentStart = DateTime.Today;
                 EmploymentLevel = SupervisoryLevel.Entry;
             }
+        }
+
+        /// <summary>
+        /// Causes navigation to the Report page.
+        /// Confirms with the user before executing.
+        /// </summary>
+        /// <returns></returns>
+        private async Task GoToReport()
+        {
+            string message = "Leaving the page will lose any unsaved data. Are you sure you wish to continue?";
         }
 
         /// <summary>
