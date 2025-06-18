@@ -127,6 +127,11 @@ namespace BlazorWebApp.Components.Pages.InClass
         private async Task GoToReport()
         {
             string message = "Leaving the page will lose any unsaved data. Are you sure you wish to continue?";
+
+            if (await JSRuntime.InvokeAsync<bool>("confirm", message))
+            {
+                NavManager.NavigateTo("report");
+            }
         }
 
         /// <summary>
