@@ -29,29 +29,41 @@
 	</div>
 }
 
-<div class="row">
-	<!--overflow-scroll will add a scroll bar to my table if there is more content than fits in the proved space-->
-	<div class="offset-4 col-md-4 overflow-scroll">
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Position Title</th>
-					<th>Start Date</th>
-					<th>Level</th>
-					<th>Years</th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach (var employment in Employments)
-				{
+<!--This exists to inform our user what is happening. Did the file not load? Is there no data in it?-->
+@if (Employments == null)
+{
+	<p>No CSV data to display.</p>
+}
+else if (Employments.Count == 0)
+{
+	<p>No Employment records to display.</p>
+}
+else
+{
+	<div class="row">
+		<!--overflow-scroll will add a scroll bar to my table if there is more content than fits in the proved space-->
+		<div class="offset-4 col-md-4 overflow-scroll">
+			<table class="table table-striped">
+				<thead>
 					<tr>
-						<td>@employment.Title</td>
-						<td>@employment.StartDate.ToShortDateString()</td>
-						<td>@employment.Level</td>
-						<td>@employment.Years</td>
+						<th>Position Title</th>
+						<th>Start Date</th>
+						<th>Level</th>
+						<th>Years</th>
 					</tr>
-				}
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					@foreach (var employment in Employments)
+					{
+						<tr>
+							<td>@employment.Title</td>
+							<td>@employment.StartDate.ToShortDateString()</td>
+							<td>@employment.Level</td>
+							<td>@employment.Years</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
 	</div>
-</div>
+}

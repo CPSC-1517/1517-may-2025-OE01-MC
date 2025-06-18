@@ -164,6 +164,11 @@
             Years = Math.Round((span.Days / 365.25), 1); //365.25 accounts for leap years
         }
 
+        /// <summary>
+        /// Creates a new instance of Employment based on CSV data.
+        /// </summary>
+        /// <param name="csvData"></param>
+        /// <returns></returns>
         public static Employment Parse(string csvData)
         {
             List<string> data = csvData.Split(',').ToList();
