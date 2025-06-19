@@ -1,0 +1,38 @@
+Project: Bus Class Implementation
+Objective: Develop a Bus class in C# with specific properties, methods, and error handling, along with supporting xUnit tests using FluentAssertions.
+
+Specifications:
+
+Class Definition:
+	The class should be named Bus.
+
+Properties:
+	string Route: Auto-implemented property with a private setter. Must not be null or empty.
+	string BusNumber: Auto-implemented property with a private setter. Must not be null or empty.
+	int Capacity: Auto-implemented property with a private setter. Must be greater than zero.
+	double Fare: Auto-implemented property with a private setter. Must not be negative. Default value is 2.50.
+	List<string> Stops: Auto-implemented property with a private setter. Must not be null.
+
+Constructors:
+	No default constructor.
+	A greedy constructor that initializes Route, BusNumber, Capacity, and Fare (with a default value of 2.50). The Stops list should be initialized as an empty list.
+
+Methods:
+	void AddStop(string stop): Adds a stop to the Stops list. Throws an exception if the stop is null or empty.
+	void RemoveStop(string stop): Removes a stop from the Stops list. Throws an exception if the stop is null or empty.
+	override string ToString(): Returns a CSV string of the properties.
+
+Error Handling:
+	All properties should have appropriate error checking for null or negative values.
+
+Test Cases:
+	Test	Description											Expected Output
+	TC01	Constructor initializes properties correctly		Properties set correctly, Stops list is empty
+	TC02	Constructor throws exception for null Route			ArgumentException with message including "null or empty"
+	TC03	Constructor throws exception for null BusNumber		ArgumentException with message including "null or empty"
+	TC04	Constructor throws exception for zero Capacity		ArgumentException with message including "greater than zero"
+	TC05	AddStop adds stop to list							Stops list contains 1 stop
+	TC06	AddStop throws exception for null stop				ArgumentException with message including "null or empty"
+	TC07	RemoveStop removes stop from list					Stops list does not contain "Stop1"
+	TC08	RemoveStop throws exception for null stop			ArgumentException with message including "null or empty"
+	TC09	ToString returns CSV format							"Route1,Bus100,50,2.5,Stop1;Stop2"
