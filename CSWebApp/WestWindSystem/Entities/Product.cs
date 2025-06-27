@@ -16,18 +16,32 @@ namespace WestWindSystem.Entities;
 public partial class Product
 {
     [Key]
+    /// <summary>
+    /// If our pkey (primary key) is not an IDENTITY key then we should add additional annotation.
+    /// DatabaseGeneratedOption.Identity - autoincrementing int or similar pkeys
+    /// DatabaseGeneratedOption.Computed - This is for computed columns.
+    ///     ie. Columns: First Last
+    ///         Computed Column: Name = First, Last
+    /// DatabaseGeneratedOption.None - This is for everything else. ie. Date, String, etc.
+    /// </summary>
     public int ProductID { get; set; }
 
-    [Required]
-    [StringLength(40)]
+    /// <summary>
+    /// We can add ErrorMessages to our DBO (enitites)
+    /// </summary>
+    [Required (ErrorMessage = "Product name is required. Can not be blank.")]
+    [StringLength(40, ErrorMessage = "Prouct name is limited to 40 characters.")]
     public string ProductName { get; set; }
 
     public int SupplierID { get; set; }
 
     public int CategoryID { get; set; }
 
+    /// <summary>
+    /// We can also add additional validation not present in the Database (DB)
+    /// </summary>
     [Required]
-    [StringLength(20)]
+    [StringLength(20, MinimumLength = 3, ErrorMessage = "QuantityPerUnit must be between 3 and 20 characters.")]
     public string QuantityPerUnit { get; set; }
 
     public short? MinimumOrderQuantity { get; set; }
@@ -39,10 +53,22 @@ public partial class Product
 
     public bool Discontinued { get; set; }
 
+    /// <summary>
+    /// ForeignKey(fkey) map (reference) a different Table/Class.
+    /// Fkeys that reference a single class are a Parent relationship
+    /// IE the class they're defined in is used in the referenced Parent object.
+    /// Category is the Parent of Product.
+    /// </summary>
     [ForeignKey("CategoryID")]
     [InverseProperty("Products")]
     public virtual Category Category { get; set; }
 
+
+    /// <summary>
+    /// Any ICollection declarations have a Child relationship with the current class.
+    /// IE they're referenced in the class they're defined in
+    /// Product has a number of ManiestItem Children
+    /// </summary>
     [InverseProperty("Product")]
     public virtual ICollection<ManifestItem> ManifestItems { get; set; } = new List<ManifestItem>();
 
