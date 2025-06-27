@@ -1,0 +1,165 @@
+﻿{
+   "CodeGenerationMode": 5,
+   "ContextClassName": "WestWindContext",
+   "ContextNamespace": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": "DAL",
+   "OutputPath": "Entities",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "WestWindSystem",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 0,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[dbo].[Addresses]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BuildVersion]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Categories]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Customers]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Employees]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[EmployeeTerritories]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ManifestItems]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrderDetails]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Orders]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Payments]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PaymentTypes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Products]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Regions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Shipments]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Shippers]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Suppliers]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Territories]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ExtendedOrderDetails]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[InvoiceItems]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[OrderSubtotals]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[Customers_GetByPartialCompanyName]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[Customers_GetByPartialContactName]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[Orders_GetByCustomer]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[Orders_GetByEmployee]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[Orders_GetByShipper]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[Products_GetByPartialProductName]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[Products_GetByPriceRange]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[Products_GetBySupplier]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[Suppliers_GetByPartialCompanyName]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[Suppliers_GetByPartialContactName]",
+         "ObjectType": 1
+      }
+   ],
+   "UiHint": null,
+   "UncountableWords": null,
+   "UseAsyncStoredProcedureCalls": true,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": true,
+   "UseDatabaseNamesForRoutines": true,
+   "UseDateOnlyTimeOnly": true,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": false,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseInternalAccessModifiersForSprocsAndFunctions": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false,
+   "UseT4Split": false
+}
