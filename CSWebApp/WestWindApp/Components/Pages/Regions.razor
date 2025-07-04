@@ -1,5 +1,31 @@
-﻿<h3>Regions</h3>
+﻿@page "/regions"
 
-@code {
+<PageTitle>Region Query</PageTitle>
 
+@rendermode InteractiveServer
+
+@using WestWindSystem.BLL;
+@using WestWindSystem.Entities;
+
+<h3>Region Query</h3>
+<h4>Single Record Query</h4>
+
+@if (FeedbackMessage.Length > 0)
+{
+	<div class="alert alert-info">
+		<p>@FeedbackMessage</p>
+	</div>
+}
+
+@if (ErrorMsgs.Count > 0)
+{
+	<div class="alert alert-danger">
+		<p>Please fix the following errors:</p>
+		<ul>
+			@foreach (var error in ErrorMsgs)
+			{
+				<li>@error</li>
+			}
+		</ul>
+	</div>
 }

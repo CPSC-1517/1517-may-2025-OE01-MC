@@ -2,5 +2,8 @@
 {
     public partial class Regions
     {
+        string FeedbackMessage = String.Empty;
+        List<string> ErrorMsgs = new();
+
     }
 }
