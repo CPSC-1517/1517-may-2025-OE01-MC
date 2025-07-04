@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WestWindSystem.BLL;
+
 
 //Usings for our WestWindSystem
 using WestWindSystem.DAL;
@@ -31,11 +33,11 @@ namespace WestWindSystem
             #region Services
 
             //We'll replace "Something" with the name of our service.
-            services.AddTransient<Something>((serviceProvider) =>
+            services.AddTransient<BuildVersionServices>((serviceProvider) =>
             {
                 var context = serviceProvider.GetService<WestWindContext>();
 
-                return new Something(context);
+                return new BuildVersionServices(context);
             });
 
             #endregion
