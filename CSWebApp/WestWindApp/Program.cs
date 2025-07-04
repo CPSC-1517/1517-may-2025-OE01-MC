@@ -6,6 +6,12 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//Add our Database Connection String. This must be a connection string in appsettings.json.
+var connectionString = builder.Configuration.GetConnectionString("WWDB");
+
+//This passes our connection string to our services for use. Must be called before builder.Build();
+builder.Services.WestWindExtensionServices(options => options.UseSqlServer(connectionString));
+
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
