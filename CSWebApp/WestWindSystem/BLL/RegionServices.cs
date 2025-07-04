@@ -28,15 +28,33 @@ namespace WestWindSystem.BLL
         //This is where the service actually does stuff with our Database
         #region Services
 
-        public BuildVersion? GetBuildVersion() //BuildVersionGet -or- BuildVersion_Get are also common naming schemes.
+        /// <summary>
+        /// Return all records from the Region table.
+        /// 
+        /// This is a dangerous service. It will cause problems if your table has a large number of records (>1000).
+        /// </summary>
+        /// <returns>All records or an empty list.</returns>
+        public List<Region> GetAllRegions()
         {
-            //IEnumerable is one of the base classes (interfaces) that list derives from
-            //We use it here to prevet a database query. Once we turn this into a list it will query our database.
-            IEnumerable<BuildVersion> records = _Context.BuildVersions;
+            IEnumerable<Region> records = _Context.Regions;
 
-            return records.FirstOrDefault();
+            return records.ToList();
         }
 
+        public Region? GetRegionByID(int id)
+        {
+            Region? region = null;
+
+            /*Equivalent to:
+                Select * From Regions
+                Where RegionID is id
+            */
+            region = _Context.Regions.FirstOrDefault(
+                x => x.RegionID == id
+            );
+
+            return region;
+        }
         #endregion
     }
 }
