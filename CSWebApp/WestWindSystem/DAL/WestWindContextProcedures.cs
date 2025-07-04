@@ -34,11 +34,11 @@ namespace WestWindSystem.DAL
         }
     }
 
-    public partial class WestWindContextProcedures : IWestWindContextProcedures
+    internal partial class WestWindContextProcedures : IWestWindContextProcedures
     {
         private readonly WestWindContext _context;
 
-        public WestWindContextProcedures(WestWindContext context)
+        internal WestWindContextProcedures(WestWindContext context)
         {
             _context = context;
         }
