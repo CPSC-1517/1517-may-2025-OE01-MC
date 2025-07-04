@@ -1,0 +1,125 @@
+﻿@page "/busform"
+@using System.IO
+@using BusPractice
+
+@rendermode InteractiveServer
+
+<PageTitle>Add Bus</PageTitle>
+
+<h3>Add Bus</h3>
+
+@if (!string.IsNullOrWhiteSpace(feedBackMsg))
+{
+    <div class="alert alert-success">
+        <p>@feedBackMsg</p>
+    </div>
+}
+
+@if (errorMsgs.Count > 0)
+{
+    <div class="alert alert-danger">
+        <p>Please fix the following issues:</p>
+        <ul>
+            @foreach (var error in errorMsgs)
+            {
+                <li>@error</li>
+            }
+        </ul>
+    </div>
+}
+
+<fieldset>
+    <div>
+        <label for="route">Route</label>
+        <input type="text" id="route" @bind="_Route" />
+    </div>
+
+    <div>
+        <label for="busNumber">Bus Number</label>
+        <input type="text" id="busNumber" @bind="_BusNumber" />
+    </div>
+
+    <div>
+        <label for="capacity">Capacity</label>
+        <input type="number" id="capacity" @bind="_Capacity" />
+    </div>
+
+    <div>
+        <label for="fare">Fare</label>
+        <input type="number" step="0.01" id="fare" @bind="_Fare" />
+    </div>
+
+    <div>
+        <label for="stops" class="form-label">Stops (separated by semicolons)</label>
+        <input type="text" id="stops" class="form-control" @bind="stopsInput" />
+    </div>
+
+    <button type="submit" @onclick="HandleValidSubmit">Add Bus</button>
+    <button type="button" @onclick="ClearForm">Clear Form</button>
+</fieldset>
+
+@code {
+    private Bus newBus = null;
+
+    private string stopsInput;
+
+    private List<string> errorMsgs = new();
+    private string feedBackMsg = String.Empty;
+
+    private string _Route = String.Empty;
+    private string _BusNumber = String.Empty;
+    private int _Capacity = 0;
+    private double _Fare = 0.0;
+
+    private void HandleValidSubmit()
+    {
+        // Reset errors
+        errorMsgs.Clear();
+
+        if (string.IsNullOrWhiteSpace(_Route))
+        {
+            errorMsgs.Add("Route cannot be null or empty.");
+        }
+        if (string.IsNullOrWhiteSpace(_BusNumber))
+        {
+            errorMsgs.Add("Bus Number cannot be null or empty.");
+        }
+        if (_Capacity <= 0)
+        {
+            errorMsgs.Add("Capacity must be greater than zero.");
+        }
+        if (_Fare < 0)
+        {
+            errorMsgs.Add("Fare cannot be negative.");
+        }
+
+        if (errorMsgs.Count == 0)
+        {
+            newBus = new Bus(_Route, _BusNumber, _Capacity, _Fare);
+
+            var stops = stopsInput.Split(';');
+            foreach (var stop in stops)
+            {
+                newBus.AddStop(stop.Trim());
+            }
+
+            string filename = "Data/GoodData.csv";
+
+            string line = $"{newBus.ToString()}\n";
+            System.IO.File.AppendAllText(filename, line);
+
+            ClearForm();
+
+            feedBackMsg = "New Bus successfully created!";
+        }
+    }
+
+    private void ClearForm()
+    {
+        newBus = null;
+        stopsInput = String.Empty;
+
+        errorMsgs.Clear();
+        feedBackMsg = String.Empty;
+    }
+}

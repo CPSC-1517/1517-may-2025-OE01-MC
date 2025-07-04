@@ -1,0 +1,41 @@
+﻿@page "/busform"
+@using System.IO
+@using BusPractice
+
+@rendermode InteractiveServer
+
+<PageTitle>Add Bus</PageTitle>
+
+<h3>Add Bus</h3>
+
+@if (!string.IsNullOrWhiteSpace(feedBackMsg))
+{
+    <div class="alert alert-success">
+        <p>@feedBackMsg</p>
+    </div>
+}
+
+@if (errorMsgs.Count > 0)
+{
+    <div class="alert alert-danger">
+        <p>Please fix the following issues:</p>
+        <ul>
+            @foreach (var error in errorMsgs)
+            {
+                <li>@error</li>
+            }
+        </ul>
+    </div>
+}
+
+<!--
+    Include fields for all required info.
+    Validate all fields.
+    Have a submit and clear button.
+-->
+
+@code {
+    private List<string> errorMsgs = new();
+    private string feedBackMsg = String.Empty;
+
+}
