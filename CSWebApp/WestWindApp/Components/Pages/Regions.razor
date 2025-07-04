@@ -29,3 +29,29 @@
 		</ul>
 	</div>
 }
+
+<fieldset>
+	<legend>Input Query Values</legend>
+
+	<label for="region-id">Enter a Region ID:</label>
+	<input id="region-id" type="number" placeholder="Enter ID" @bind="TargetID" min="0">
+
+	<button type="submit" @onclick="GetByID">Fetch Region</button>
+
+	<label for="region-select">Select a Region:</label>
+	<select id="region-select" @bind="SelectionID">
+		<option value="0">Select...</option>
+		@foreach(var region in RegionsList)
+		{
+			<option value="@region.RegionID">@region.RegionDescription</option>
+		}
+	</select>
+	<button type="submit" @onclick="GetBySelect">Fetch Region</button>
+</fieldset>
+
+<p>Results of the query:</p>
+@if(_Region != null)
+{
+	<p>Region ID: @_Region.RegionID</p>
+	<p>Region Description: @_Region.RegionDescription</p>
+}
