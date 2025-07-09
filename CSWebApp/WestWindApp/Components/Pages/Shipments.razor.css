@@ -1,0 +1,12 @@
+﻿.table-height{
+    height: 450px;
+}
+
+thead{
+    position: sticky;
+    top: 0;
+}
+
+.money{
+    text-align: right;
+}

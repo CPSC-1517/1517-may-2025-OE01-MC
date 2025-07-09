@@ -1,1 +1,86 @@
-﻿<h3>Shipments</h3>
+﻿@page "/shipments"
+<PageTitle>Shipment Table</PageTitle>
+@rendermode InteractiveServer
+
+<!-- additional namespaces-->
+@using WestWindSystem.BLL;
+@using WestWindSystem.Entities;
+
+<h1>Shipment Table</h1>
+<h4>... multi record query</h4>
+
+@if (FeedbackMsg.Length > 0)
+{
+    <div class="alert alert-info">
+        <p>@FeedbackMsg</p>
+    </div>
+}
+
+@if (ErrorMsgs.Count > 0)
+{
+    <div class="alert alert-danger">
+        <p>Please fix the following issues:</p>
+        <ul>
+            @foreach (var error in ErrorMsgs)
+            {
+                <li>@error</li>
+            }
+        </ul>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <label>
+            Enter a year:
+            <input type="number" placeholder="Enter Year" @bind="Year">
+        </label>
+
+        <label>
+            Enter a month:
+            <input type="number" placeholder="Enter Month" @bind="Month">
+        </label>
+
+        <button type="submit" @onclick="GetShipments">
+            Fetch Shipments
+        </button>
+    </div>
+    <div class="col-md-9">
+        @if (ShipmentList is null)
+        {
+            <p>Enter desired year and month for search.</p>
+        }
+        else if (ShipmentList.Count == 0)
+        {
+            <p>No records found for @Year and @Month.</p>
+        }
+        else
+        {
+            <div class="overflow-scroll table-height">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Order</th>
+                            <th>Date</th>
+                            <th>Shipper</th>
+                            <th>Freight $</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var record in ShipmentList)
+                        {
+                            <tr>
+                                <td>@record.ShipmentID</td>
+                                <td>@record.OrderID</td>
+                                <td>@record.ShippedDate.ToShortDateString()</td>
+                                <td>@record.ShipViaNavigation.CompanyName</td>
+                                <td class="money">@(String.Format("{0:#,##0.00}", record.FreightCharge))</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>
