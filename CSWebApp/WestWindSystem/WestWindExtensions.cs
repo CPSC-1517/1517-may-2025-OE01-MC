@@ -54,6 +54,13 @@ namespace WestWindSystem
                 return new ShipperServices(context);
             });
 
+            services.AddTransient<ShipmentServices>((serviceProvider) =>
+            {
+                var context = serviceProvider.GetService<WestWindContext>();
+
+                return new ShipmentServices(context);
+            });
+
             #endregion
         }
     }
