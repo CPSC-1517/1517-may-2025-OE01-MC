@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,7 +37,17 @@ namespace WestWindSystem.BLL
              * and Month is month
              * OrderBy ShippedDate
              */
+            //V1
+            //IEnumerable<Shipment> records = _Context.Shipments
+            //                                .Where(shipment => shipment.ShippedDate.Year == year &&
+            //                                                   shipment.ShippedDate.Month == month)
+            //                                .OrderBy(shipment => shipment.ShippedDate);
+
+            //V2
+            //Any time we want to access a property in our entities via a foreign key, we need to use an Include statement.
+            //We could do this manually by querying both tables and combining them, but Include is safer, faster, and more reliabe for basic joins.
             IEnumerable<Shipment> records = _Context.Shipments
+                                            .Include(shipment => shipment.ShipViaNavigation) //Functionally the same as Join in SQL
                                             .Where(shipment => shipment.ShippedDate.Year == year &&
                                                                shipment.ShippedDate.Month == month)
                                             .OrderBy(shipment => shipment.ShippedDate);
