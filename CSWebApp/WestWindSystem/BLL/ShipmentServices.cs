@@ -11,15 +11,39 @@ namespace WestWindSystem.BLL
 {
     public class ShipmentServices
     {
-        private readonly WestWindContext _context;
+        private readonly WestWindContext _Context;
 
         internal ShipmentServices( WestWindContext context)
         {
-            _context = context;
+            _Context = context;
         }
+
+        #region Services
+
+
+        /// <summary>
+        /// Return any Shipment records from the given year and month.
+        /// </summary>
+        /// <param name="year">The year to search.</param>
+        /// <param name="month">The month to search.</param>
+        /// <returns></returns>
+        public List<Shipment> GetShipmentsByYearAndMonth(int year, int month)
+        {
+            /*
+             * Equivalent to:
+             * Select * from Shipment
+             * Where Year is year
+             * and Month is month
+             * OrderBy ShippedDate
+             */
+            IEnumerable<Shipment> records = _Context.Shipments
+                                            .Where(shipment => shipment.ShippedDate.Year == year &&
+                                                               shipment.ShippedDate.Month == month)
+                                            .OrderBy(shipment => shipment.ShippedDate);
+
+            return records.ToList();
+        }
+
+        #endregion
     }
-
-    #region Services
-
-    #endregion
 }
