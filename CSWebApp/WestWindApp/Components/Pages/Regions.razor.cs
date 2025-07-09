@@ -1,4 +1,6 @@
-﻿using WestWindSystem.Entities;
+﻿using Microsoft.AspNetCore.Components;
+using WestWindSystem.BLL;
+using WestWindSystem.Entities;
 
 namespace WestWindApp.Components.Pages
 {
@@ -14,19 +16,62 @@ namespace WestWindApp.Components.Pages
 
         List<Region> RegionsList = new();
 
+        [Inject]
+        RegionServices regionServices { get; set; }
+
+        protected override void OnInitialized()
+        {
+            RegionsList = regionServices.GetAllRegions();
+
+            base.OnInitialized();
+        }
+
         void GetByID()
         {
+            ClearData();
 
+            if(TargetID <= 0)
+            {
+                ErrorMsgs.Add($"Your region ID value {TargetID} is invalid.");
+            }
+
+            if(ErrorMsgs.Count == 0)
+            {
+                _Region = regionServices.GetRegionByID(TargetID);
+
+                if( _Region == null )
+                {
+                    FeedbackMessage = "No region found!";
+                }
+            }
         }
 
         void GetBySelect()
         {
+            ClearData();
 
+            if (SelectionID == 0)
+            {
+                ErrorMsgs.Add($"Please select a region.");
+            }
+
+            if (ErrorMsgs.Count == 0)
+            {
+                _Region = regionServices.GetRegionByID(SelectionID);
+
+                if (_Region == null)
+                {
+                    FeedbackMessage = "No region found!";
+                }
+            }
         }
 
         void ClearData()
         {
+            FeedbackMessage = String.Empty;
+            ErrorMsgs.Clear();
 
+            _Region = null;
         }
     }
 }

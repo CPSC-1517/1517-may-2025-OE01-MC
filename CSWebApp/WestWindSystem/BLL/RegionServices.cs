@@ -52,6 +52,13 @@ namespace WestWindSystem.BLL
             region = _Context.Regions.FirstOrDefault(
                 x => x.RegionID == id
             );
+            /*
+                ForEach(var region in Regions)
+                {
+                    if(region.RegionID == id)
+                        return region;
+                }
+            */
 
             return region;
         }
