@@ -9,17 +9,22 @@ using WestWindSystem.Entities;
 
 namespace WestWindSystem.BLL
 {
-    public class ShipmentServices
+    public class ShipperServices
     {
         private readonly WestWindContext _context;
 
-        internal ShipmentServices( WestWindContext context)
+        internal ShipperServices(WestWindContext context)
         {
             _context = context;
         }
+
+        #region Services
+
+        public List<Shipper> GetAllShippers()
+        {
+            return _context.Shippers.ToList();
+        }
+
+        #endregion
     }
-
-    #region Services
-
-    #endregion
 }
