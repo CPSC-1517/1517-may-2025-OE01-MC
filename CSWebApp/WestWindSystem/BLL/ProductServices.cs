@@ -24,7 +24,12 @@ namespace WestWindSystem.BLL
 
         #region Services
 
-
+        public List<Product> GetProductsByCategoryID(int categoryID)
+        {
+            return _context.Products.Where(product => product.CategoryID == categoryID)
+                                    .OrderBy(product => product.ProductName)
+                                    .ToList();
+        }
 
         #endregion
 

@@ -49,7 +49,7 @@
             one button will have a NavLink to the new page
             one button will call an event method on this page which
                 will navigate to the new page
-       
+        -->
 
         <button type="submit" class="btn btn-outline-secondary rounded-pill">
             <NavLink href="productcrud">CRUD via Navlink</NavLink>
@@ -59,7 +59,7 @@
                 @onclick="GoToCRUD">
             CRUD via Event
         </button> 
-        -->
+
     </div>
 </div>
 
@@ -83,7 +83,7 @@
                            
                             <td>@Item.ProductName</td>
                             <td>@Item.QuantityPerUnit</td>
-                            <td> @Item.Supplier.CompanyName</td>
+                            <td>@Item.Supplier.CompanyName</td>
                             <td>@(Item.Discontinued ? "Yes" : " ")</td>
                         </tr>
                     }
@@ -171,6 +171,6 @@
         //this event will use the Navigate services of the web software
         //the Navigate services must be injected into the page
         //the location your are going to is referenced by the page's routing parameter
-        
+        _navManager.NavigateTo("productcrud");
     }
 }
