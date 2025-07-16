@@ -70,6 +70,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <th>    </th>
                         <th>Product</th>
                         <th>Unit Size</th>
                         <th>Company Name</th>
@@ -80,7 +81,7 @@
                     @foreach(Product Item in ProductList)
                     {
                         <tr>
-                           
+                            <td><a href="/productcrud/@Item.ProductID">Edit</a></td>
                             <td>@Item.ProductName</td>
                             <td>@Item.QuantityPerUnit</td>
                             <td>@Item.Supplier.CompanyName</td>
