@@ -135,7 +135,10 @@
     protected override void OnInitialized()
     {
         //retrieve the list of category via the CategoryServices in your BLL
+        CategoryList = _categoryServices.GetAllCategories();
+
         //retrieve the list of supplier via the SupplierServices in your BLL
+        SupplierList = _supplierServices.GetAllSuppliers();
 
         base.OnInitialized();
     }
