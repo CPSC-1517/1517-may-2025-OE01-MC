@@ -1,6 +1,8 @@
 ﻿@page "/categoryproducts"
+
 <PageTitle>Category Products</PageTitle>
 @rendermode InteractiveServer
+
 @using WestWindSystem.Entities;
 @using WestWindSystem.BLL;
 
@@ -126,7 +128,7 @@
     private int CategoryId { get; set; }
 
     private List<Category> CategoryList { get; set; }
-    private List<Product> ProductList { get; set; }
+    private List<Product> ProductList { get; set; } = new();
     private List<Supplier> SupplierList { get; set; }
 
     [Inject]
@@ -148,6 +150,19 @@
     {
         //fetch the list of products depending of the category selection
         //if no category was selected display a message and clear old product display
+        FeedbackMessage = String.Empty;
+        ErrorMsgs.Clear();
+        ProductList.Clear();
+
+        if (CategoryId == 0)
+        {
+            FeedbackMessage = "No Category Selected!";
+        }
+
+        else
+        {
+            ProductList = _productServices.GetProductsByCategoryID(CategoryId);
+        }
 
     }
 
