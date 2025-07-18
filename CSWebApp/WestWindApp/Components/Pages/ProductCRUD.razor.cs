@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using WestWindSystem.BLL;
 using WestWindSystem.Entities;
 
@@ -22,6 +23,11 @@ namespace WestWindApp.Components.Pages
 
         private Product CurrentProduct = new();
 
+        //EditContext tracks changes to a linked object and updates accordingly
+        private EditContext _EditContext;
+        //Stores any error messages when validing our context. Replaces ErrorMsgs in previous examples.
+        private ValidationMessageStore _ValidationMessageStore;
+
         private List<Category> Categories = new();
         private List<Supplier> Suppliers = new();
 
@@ -33,8 +39,12 @@ namespace WestWindApp.Components.Pages
 
         protected override void OnInitialized()
         {
-            //Categories = _CategoryServices.Categories_Get();
-            //Suppliers = _SupplierServices.Supplier_GetList();
+            Categories = _CategoryServices.GetAllCategories();
+            Suppliers = _SupplierServices.GetAllSuppliers();
+
+            _EditContext = new EditContext(CurrentProduct);
+            //Shorthand new operator with parameter.
+            _ValidationMessageStore = new(_EditContext);
 
             base.OnInitialized();
         }
@@ -43,6 +53,40 @@ namespace WestWindApp.Components.Pages
         {
             FeedbackMessage = String.Empty;
         }
+        private void GoToSearch()
+        {
+
+        }
+
+        #region CRUD Methods
+
+        private void OnCreate()
+        {
+            try
+            {
+                if (_EditContext.Validate())
+                {
+                    FeedbackMessage = "Data is Valid!";
+                }
+            }
+
+            catch (Exception ex)
+            {
+                FeedbackMessage = $"System Error: {GetInnerException(ex).Message}";
+            }
+        }
+
+        private void OnUpdate()
+        {
+
+        }
+
+        private void OnDiscontinue()
+        {
+
+        }
+
+        #endregion
 
         private Exception GetInnerException(Exception ex)
         {

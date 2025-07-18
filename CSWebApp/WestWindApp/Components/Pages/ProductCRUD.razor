@@ -2,6 +2,7 @@
 @using WestWindSystem.Entities
 @using WestWindSystem.BLL
 
+@rendermode InteractiveServer
 
 <PageTitle>Product CRUD</PageTitle>
 
@@ -14,7 +15,8 @@
     </div>
 }
 
-<EditForm>
+<!--EditForms require either a Model(not covered in this course) or an EditContext to work.-->
+<EditForm EditContext="_EditContext">
     <!--Enables validation in our Entities-->
     <DataAnnotationsValidator/>
     <!--Catches and displays any validation errors in our form-->
@@ -29,7 +31,10 @@
 
         <label> Name
             <InputText @bind-Value="CurrentProduct.ProductName"/>
+            <ValidationMessage For="@(() => CurrentProduct.ProductName)" />
         </label>
+        <!--This validates and shows errors inline. This component must come immediately after the input.-->
+        
 
         <label> Supplier ID
             <InputSelect @bind-Value="CurrentProduct.SupplierID">
@@ -62,6 +67,7 @@
         <label> Unit Price
             <InputNumber @bind-Value="CurrentProduct.UnitPrice"/>
         </label>
+        <ValidationMessage For="@(() => CurrentProduct.UnitPrice)" />
 
         <label> Min Order Qty
             <InputNumber @bind-Value="CurrentProduct.MinimumOrderQuantity"/>
@@ -75,15 +81,15 @@
 
     <fieldset>
 
-        <button type="submit" @onclick("OnCreate")>Create</button>
+        <button type="button" @onclick="OnCreate">Create</button>
 
-        <button type="submit" @onclick("OnUpdate")>Update</button>
+        <button type="button" @onclick="OnUpdate">Update</button>
 
-        <button type="submit" @onclick("OnDiscontinue")>Discontinue</button>
+        <button type="button" @onclick="OnDiscontinue">Discontinue</button>
 
-        <button type="submit" @onclick("Clear")>Clear</button>
+        <button type="button" @onclick="Clear">Clear</button>
 
-        <button type="submit" @onclick("GoToSearch")>Search</button>
+        <button type="button" @onclick="GoToSearch">Search</button>
 
     </fieldset>
 

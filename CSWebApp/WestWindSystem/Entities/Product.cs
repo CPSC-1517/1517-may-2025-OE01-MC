@@ -47,6 +47,7 @@ public partial class Product
     public short? MinimumOrderQuantity { get; set; }
 
     [Column(TypeName = "money")]
+    [Range(0.0, Double.MaxValue, ErrorMessage = "Unit Price must be positive.")]
     public decimal UnitPrice { get; set; }
 
     public int UnitsOnOrder { get; set; }
