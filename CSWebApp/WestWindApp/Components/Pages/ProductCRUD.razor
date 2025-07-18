@@ -13,3 +13,64 @@
         @FeedbackMessage
     </div>
 }
+
+<EditForm>
+    <!--Enables validation in our Entities-->
+    <DataAnnotationsValidator/>
+    <!--Catches and displays any validation errors in our form-->
+    <ValidationSummary/>
+
+    <fieldset>
+        <label> Product ID 
+            <!--Super critical that @bind-Value have the upper-case V-->
+            <!--As this field is our Primary Key, we make it Read-only so it can't be changed-->
+            <InputNumber @bind-Value="CurrentProduct.ProductID" readonly/>
+        </label>
+
+        <label> Name
+            <InputText @bind-Value="CurrentProduct.ProductName"/>
+        </label>
+
+        <label> Supplier ID
+            <InputSelect @bind-Value="CurrentProduct.SupplierID">
+                <option value="0">-Select Supplier-</option>
+                @foreach(Supplier supplier in Suppliers)
+                {
+                    <option value="@supplier.SupplierID" selected="@(supplier.SupplierID == CurrentProduct.SupplierID)">
+                        @supplier.CompanyName
+                    </option>
+                }
+            </InputSelect>
+        </label>
+
+        <label> Category
+            <InputSelect @bind-Value="CurrentProduct.CategoryID">
+                <option value="0">-Select Category-</option>
+                @foreach (Category category in Categories)
+                {
+                    <option value="@category.CategoryID" selected="@(category.CategoryID == CurrentProduct.CategoryID)">
+                        @category.CategoryName
+                    </option>
+                }
+            </InputSelect>
+        </label>
+
+        <label> Qty / Unit
+            <InputText @bind-Value="CurrentProduct.QuantityPerUnit"/>
+        </label>
+
+        <label> Unit Price
+            <InputNumber @bind-Value="CurrentProduct.UnitPrice"/>
+        </label>
+
+        <label> Min Order Qty
+            <InputNumber @bind-Value="CurrentProduct.MinimumOrderQuantity"/>
+        </label>
+
+        <label> Units on Order
+            <InputNumber @bind-Value="CurrentProduct.UnitsOnOrder"/>
+        </label>
+
+    </fieldset>
+
+</EditForm>
