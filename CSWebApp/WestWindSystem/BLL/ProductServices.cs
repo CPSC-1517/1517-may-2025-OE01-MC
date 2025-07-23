@@ -31,6 +31,16 @@ namespace WestWindSystem.BLL
                                     .ToList();
         }
 
+        /// <summary>
+        /// Adds a Product to our database after performing further error checking.
+        /// </summary>
+        /// <param name="product">The product to add.</param>
+        /// <returns>The ID of the added product.</returns>
+        public int AddProduct(Product product)
+        {
+
+        }
+
         #endregion
 
 
