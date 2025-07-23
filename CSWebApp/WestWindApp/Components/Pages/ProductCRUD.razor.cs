@@ -76,7 +76,7 @@ namespace WestWindApp.Components.Pages
             }
         }
 
-        private void GoToSearch()
+        private async Task GoToSearch()
         {
 
         }
