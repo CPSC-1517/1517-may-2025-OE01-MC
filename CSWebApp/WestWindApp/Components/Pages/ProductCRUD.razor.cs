@@ -52,6 +52,7 @@ namespace WestWindApp.Components.Pages
         private void Clear()
         {
             FeedbackMessage = String.Empty;
+            _ValidationMessageStore.Clear();
         }
         private void GoToSearch()
         {
