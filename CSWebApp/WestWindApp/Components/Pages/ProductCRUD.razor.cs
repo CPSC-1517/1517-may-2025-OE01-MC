@@ -50,6 +50,11 @@ namespace WestWindApp.Components.Pages
             if (ProductID.HasValue) //Equivalent to != null
             {
                 CurrentProduct = _ProductServices.GetProductByID(ProductID.Value);
+
+                if (CurrentProduct == null)
+                {
+                    CurrentProduct = new Product();
+                }
             }
 
             _EditContext = new EditContext(CurrentProduct);
@@ -241,3 +246,5 @@ namespace WestWindApp.Components.Pages
         }
     }
 }
+
+//End of 4.7
