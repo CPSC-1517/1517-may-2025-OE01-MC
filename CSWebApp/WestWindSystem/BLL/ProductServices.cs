@@ -33,6 +33,11 @@ namespace WestWindSystem.BLL
                                     .ToList();
         }
 
+        public Product? GetProductByID(int ID)
+        {
+            return _context.Products.Where(prod => prod.ProductID == ID).FirstOrDefault();
+        }
+
         /// <summary>
         /// Adds a Product to our database after performing further error checking.
         /// </summary>
