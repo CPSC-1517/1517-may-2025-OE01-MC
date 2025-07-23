@@ -46,6 +46,12 @@ namespace WestWindApp.Components.Pages
             Categories = _CategoryServices.GetAllCategories();
             Suppliers = _SupplierServices.GetAllSuppliers();
 
+            //Use .HasValue as our ProductID int is nullable
+            if (ProductID.HasValue) //Equivalent to != null
+            {
+                CurrentProduct = _ProductServices.GetProductByID(ProductID.Value);
+            }
+
             _EditContext = new EditContext(CurrentProduct);
             //Shorthand new operator with parameter.
             _ValidationMessageStore = new(_EditContext);
