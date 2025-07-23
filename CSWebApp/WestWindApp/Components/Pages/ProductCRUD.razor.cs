@@ -90,11 +90,30 @@ namespace WestWindApp.Components.Pages
 
         private void OnCreate()
         {
+            Clear();
+
             try
             {
                 if (_EditContext.Validate())
                 {
-                    FeedbackMessage = "Data is Valid!";
+                    //Need to do some extra validation
+                    if(CurrentProduct.CategoryID == 0)
+                    {
+                        //Add error message to ValidationMessageStore
+                        //.Field allow us to acces any of the Inputs in our EditForm through the @bind-Value
+                        //nameof gest our Variable name, not the value
+                        _ValidationMessageStore.Add(_EditContext.Field(nameof(CurrentProduct.CategoryID)),
+                                                    "You must select a Category.");
+                    }
+
+                    if (CurrentProduct.SupplierID == 0)
+                    {
+                        //Add error message to ValidationMessageStore
+                        //.Field allow us to acces any of the Inputs in our EditForm through the @bind-Value
+                        //nameof gest our Variable name, not the value
+                        _ValidationMessageStore.Add(_EditContext.Field(nameof(CurrentProduct.SupplierID)),
+                                                    "You must select a Supplier.");
+                    }
                 }
             }
 
