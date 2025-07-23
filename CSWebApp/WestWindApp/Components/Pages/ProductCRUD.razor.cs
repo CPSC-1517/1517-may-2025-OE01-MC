@@ -189,7 +189,7 @@ namespace WestWindApp.Components.Pages
                     //If we're good at this point, we'll assume we have good data to push to the DB.
                     else
                     {
-                        int affectedRows = 435; //Code for YES - Placeholder
+                        int affectedRows = _ProductServices.UpdateProduct(CurrentProduct);
 
                         if (affectedRows == 0)
                         {
