@@ -189,9 +189,17 @@ namespace WestWindApp.Components.Pages
                     //If we're good at this point, we'll assume we have good data to push to the DB.
                     else
                     {
-                        int newProductID = 1337; //Placeholder
+                        int affectedRows = 435; //Code for YES - Placeholder
 
-                        FeedbackMessage = $"Product {CurrentProduct.ProductName} with ID: {newProductID} has been saved.";
+                        if (affectedRows == 0)
+                        {
+                            FeedbackMessage = $"Product {CurrentProduct.ProductName} with ID: {CurrentProduct.ProductID} has not been updated.";
+                        }
+
+                        else
+                        {
+                            FeedbackMessage = $"Product {CurrentProduct.ProductName} with ID: {CurrentProduct.ProductID} has been updated.";
+                        }
                     }
                 }
             }
