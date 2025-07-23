@@ -114,7 +114,34 @@ namespace WestWindApp.Components.Pages
                         _ValidationMessageStore.Add(_EditContext.Field(nameof(CurrentProduct.SupplierID)),
                                                     "You must select a Supplier.");
                     }
+
+                    //We could/should do additional error checking here.
+
+                    //Check if there are any new errors.
+                    if(_EditContext.GetValidationMessages().Any())
+                    {
+                        //Tell our EditForm that there are new errors to display and update.
+                        _EditContext.NotifyValidationStateChanged();
+                    }
+                    
+                    //If we're good at this point, we'll assume we have good data to push to the DB.
+                    else
+                    {
+                        int newProductID = 1337; //Placeholder
+
+                        FeedbackMessage = $"Product {CurrentProduct.ProductName} with ID: {newProductID} has been saved.";
+                    }
                 }
+            }
+            //Should probably be putting these messages in some sort of Error list instead of in Feedback.
+            catch (ArgumentNullException ex)
+            {
+                FeedbackMessage = $"Missing Data: {GetInnerException(ex).Message}";
+            }
+
+            catch (ArgumentException ex)
+            {
+                FeedbackMessage = $"Data Issue: {GetInnerException(ex).Message}";
             }
 
             catch (Exception ex)
