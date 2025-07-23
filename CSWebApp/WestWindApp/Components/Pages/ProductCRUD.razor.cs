@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.JSInterop;
 using WestWindSystem.BLL;
 using WestWindSystem.Entities;
 
@@ -37,6 +38,9 @@ namespace WestWindApp.Components.Pages
         [Inject]
         protected NavigationManager NavManager { get; set; }
 
+        [Inject]
+        protected IJSRuntime JSRuntime { get; set; }
+
         protected override void OnInitialized()
         {
             Categories = _CategoryServices.GetAllCategories();
@@ -55,9 +59,21 @@ namespace WestWindApp.Components.Pages
             _ValidationMessageStore.Clear();
         }
 
-        private void OnClear()
+        private async Task OnClear()
         {
+            if(await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to clear the page?"))
+            {
+                Clear();
 
+                CurrentProduct = new();
+
+                //Update our EditContext as they are specific to the instance assigned to them
+                //Critical to do this or your form WILL stop working
+                _EditContext = new EditContext(CurrentProduct);
+
+                //Also important to update our ValidationMessageStore
+                _ValidationMessageStore = new ValidationMessageStore(_EditContext);
+            }
         }
 
         private void GoToSearch()
