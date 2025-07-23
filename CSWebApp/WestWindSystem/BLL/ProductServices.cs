@@ -79,6 +79,11 @@ namespace WestWindSystem.BLL
             return product.ProductID;
         }
 
+
+        public int UpdateProduct(Product product)
+        {
+            return 0;
+        }
         #endregion
 
 
