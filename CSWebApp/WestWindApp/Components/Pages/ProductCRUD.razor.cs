@@ -78,7 +78,12 @@ namespace WestWindApp.Components.Pages
 
         private async Task GoToSearch()
         {
+            if (await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to leave the page?"))
+            {
+                Clear();
 
+                NavManager.NavigateTo("categoryproducts");
+            }
         }
 
         #region CRUD Methods
