@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -82,7 +84,43 @@ namespace WestWindSystem.BLL
 
         public int UpdateProduct(Product product)
         {
-            return 0;
+            //Check if our data is valid
+            if (product == null)
+            {
+                throw new ArgumentNullException("Product Information Required!");
+            }
+
+            //Check to make sure the given ID exists
+            if (!_context.Products.Any(prod => prod.ProductID == product.ProductID))
+            {
+                throw new ArgumentException($"Product with ID: {product.ProductID} does not exist!");
+            }
+
+            //Validate and business rules/logic. These could be different from Create.
+            //BL is that no 2 products can have the same SupplierID, ProductName, and QuantityPerUnit
+
+            bool exists = false;
+
+            exists = _context.Products.Any(x => x.SupplierID == product.SupplierID &&
+                                                 x.ProductName == product.ProductName &&
+                                                 x.QuantityPerUnit == product.QuantityPerUnit &&
+                                                 x.ProductID != product.ProductID); //Need to make sure the match isn't ourself
+
+            //Throw an error if there's a duplicate
+            if (exists)
+            {
+                throw new ArgumentException("Product already exists!");
+            }
+
+            //Could test that values are in acceptable ranges here
+
+            //Update checks all of our fields and only updates the ones that have changed
+            EntityEntry<Product> updating = _context.Entry(product);
+
+            updating.State = EntityState.Modified;
+
+            //Return the number of records updated
+            return _context.SaveChanges();
         }
         #endregion
 
