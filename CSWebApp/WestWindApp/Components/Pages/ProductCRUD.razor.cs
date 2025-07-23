@@ -127,7 +127,7 @@ namespace WestWindApp.Components.Pages
                     //If we're good at this point, we'll assume we have good data to push to the DB.
                     else
                     {
-                        int newProductID = 1337; //Placeholder
+                        int newProductID = _ProductServices.AddProduct(CurrentProduct);
 
                         FeedbackMessage = $"Product {CurrentProduct.ProductName} with ID: {newProductID} has been saved.";
                     }
