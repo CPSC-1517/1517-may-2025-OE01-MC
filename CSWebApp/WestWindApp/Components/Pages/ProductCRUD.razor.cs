@@ -233,7 +233,142 @@ namespace WestWindApp.Components.Pages
 
         private void OnDiscontinue()
         {
+            Clear();
 
+            try
+            {
+                if (_EditContext.Validate())
+                {
+                    //Need to do some extra validation
+                    if (CurrentProduct.CategoryID == 0)
+                    {
+                        //Add error message to ValidationMessageStore
+                        //.Field allow us to acces any of the Inputs in our EditForm through the @bind-Value
+                        //nameof gest our Variable name, not the value
+                        _ValidationMessageStore.Add(_EditContext.Field(nameof(CurrentProduct.CategoryID)),
+                                                    "You must select a Category.");
+                    }
+
+                    if (CurrentProduct.SupplierID == 0)
+                    {
+                        //Add error message to ValidationMessageStore
+                        //.Field allow us to acces any of the Inputs in our EditForm through the @bind-Value
+                        //nameof gest our Variable name, not the value
+                        _ValidationMessageStore.Add(_EditContext.Field(nameof(CurrentProduct.SupplierID)),
+                                                    "You must select a Supplier.");
+                    }
+
+                    //We could/should do additional error checking here.
+
+                    //Check if there are any new errors.
+                    if (_EditContext.GetValidationMessages().Any())
+                    {
+                        //Tell our EditForm that there are new errors to display and update.
+                        _EditContext.NotifyValidationStateChanged();
+                    }
+
+                    //If we're good at this point, we'll assume we have good data to push to the DB.
+                    else
+                    {
+                        int affectedRows = _ProductServices.DiscontinueProduct(CurrentProduct);
+
+                        if (affectedRows == 0)
+                        {
+                            FeedbackMessage = $"Product {CurrentProduct.ProductName} with ID: {CurrentProduct.ProductID} has not been discontinued.";
+                        }
+
+                        else
+                        {
+                            FeedbackMessage = $"Product {CurrentProduct.ProductName} with ID: {CurrentProduct.ProductID} has been discontinued.";
+                        }
+                    }
+                }
+            }
+            //Should probably be putting these messages in some sort of Error list instead of in Feedback.
+            catch (ArgumentNullException ex)
+            {
+                FeedbackMessage = $"Missing Data: {GetInnerException(ex).Message}";
+            }
+
+            catch (ArgumentException ex)
+            {
+                FeedbackMessage = $"Data Issue: {GetInnerException(ex).Message}";
+            }
+
+            catch (Exception ex)
+            {
+                FeedbackMessage = $"System Error: {GetInnerException(ex).Message}";
+            }
+        }
+
+        private void OnActivated()
+        {
+            Clear();
+
+            try
+            {
+                if (_EditContext.Validate())
+                {
+                    //Need to do some extra validation
+                    if (CurrentProduct.CategoryID == 0)
+                    {
+                        //Add error message to ValidationMessageStore
+                        //.Field allow us to acces any of the Inputs in our EditForm through the @bind-Value
+                        //nameof gest our Variable name, not the value
+                        _ValidationMessageStore.Add(_EditContext.Field(nameof(CurrentProduct.CategoryID)),
+                                                    "You must select a Category.");
+                    }
+
+                    if (CurrentProduct.SupplierID == 0)
+                    {
+                        //Add error message to ValidationMessageStore
+                        //.Field allow us to acces any of the Inputs in our EditForm through the @bind-Value
+                        //nameof gest our Variable name, not the value
+                        _ValidationMessageStore.Add(_EditContext.Field(nameof(CurrentProduct.SupplierID)),
+                                                    "You must select a Supplier.");
+                    }
+
+                    //We could/should do additional error checking here.
+
+                    //Check if there are any new errors.
+                    if (_EditContext.GetValidationMessages().Any())
+                    {
+                        //Tell our EditForm that there are new errors to display and update.
+                        _EditContext.NotifyValidationStateChanged();
+                    }
+
+                    //If we're good at this point, we'll assume we have good data to push to the DB.
+                    else
+                    {
+                        int affectedRows = _ProductServices.ActivateProduct(CurrentProduct);
+
+                        if (affectedRows == 0)
+                        {
+                            FeedbackMessage = $"Product {CurrentProduct.ProductName} with ID: {CurrentProduct.ProductID} has not been activated.";
+                        }
+
+                        else
+                        {
+                            FeedbackMessage = $"Product {CurrentProduct.ProductName} with ID: {CurrentProduct.ProductID} has been activated.";
+                        }
+                    }
+                }
+            }
+            //Should probably be putting these messages in some sort of Error list instead of in Feedback.
+            catch (ArgumentNullException ex)
+            {
+                FeedbackMessage = $"Missing Data: {GetInnerException(ex).Message}";
+            }
+
+            catch (ArgumentException ex)
+            {
+                FeedbackMessage = $"Data Issue: {GetInnerException(ex).Message}";
+            }
+
+            catch (Exception ex)
+            {
+                FeedbackMessage = $"System Error: {GetInnerException(ex).Message}";
+            }
         }
 
         #endregion

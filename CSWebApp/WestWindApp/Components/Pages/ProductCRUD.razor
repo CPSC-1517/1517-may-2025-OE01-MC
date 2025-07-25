@@ -84,7 +84,14 @@
 
         <button type="button" @onclick="OnUpdate">Update</button>
 
-        <button type="button" @onclick="OnDiscontinue">Discontinue</button>
+        @if (CurrentProduct.Discontinued)
+        {
+            <button type="button" @onclick="OnActivated">Activate</button>
+        }
+        else
+        {
+            <button type="button" @onclick="OnDiscontinue">Discontinue</button> 
+        }
 
         <button type="button" @onclick="OnClear">Clear</button>
 
