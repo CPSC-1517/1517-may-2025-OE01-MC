@@ -209,6 +209,13 @@ namespace WestWindSystem.BLL
                 throw new ArgumentException("Product has Order Details, can not delete.");
             }
 
+            //If we get here, we should be OK to delete
+
+            EntityEntry<Product> toBeDeleted = _context.Entry(product);
+
+            //Will call a Delete on our DB.
+            toBeDeleted.State = EntityState.Deleted;
+
             return _context.SaveChanges();
         }
 
