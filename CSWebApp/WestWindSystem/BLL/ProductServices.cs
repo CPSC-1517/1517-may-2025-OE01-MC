@@ -130,7 +130,29 @@ namespace WestWindSystem.BLL
 
         public int DiscontinueProduct(Product product)
         {
-            return 0;
+            if (product is null)
+            {
+                throw new ArgumentNullException("Product Information Required!");
+            }
+
+            Product productToDiscontinue = null;
+
+            productToDiscontinue = _context.Products.FirstOrDefault(
+                                                x => x.ProductID == product.ProductID);
+
+            if(productToDiscontinue is null)
+            {
+                throw new ArgumentException("Product doesn't exist");
+            }
+
+            productToDiscontinue.Discontinued = true;
+
+            //Only updates the fields that have changed
+            EntityEntry<Product> discontinuing = _context.Entry(productToDiscontinue);
+
+            discontinuing.State = EntityState.Modified;
+
+            return _context.SaveChanges();
         }
 
         public int ActivateProduct(Product product)
