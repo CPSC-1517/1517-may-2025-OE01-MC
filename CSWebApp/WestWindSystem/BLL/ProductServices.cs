@@ -184,6 +184,31 @@ namespace WestWindSystem.BLL
 
         public int DeleteProduct(Product product)
         {
+            if (product is null)
+            {
+                throw new ArgumentNullException("Product Information Required!");
+            }
+
+            //Get out early if there is any issue as Delete is a dangerous operation
+            if(!_context.Products.Any(prod => prod.ProductID == product.ProductID))
+            {
+                throw new ArgumentException("Product could not be found!");
+            }
+
+            //Test to see if our product has any children (ICollections)
+            if (_context.Products.Any(prod => prod.ManifestItems.Count > 0 &&
+                                              prod.ProductID == product.ProductID))
+            {
+                throw new ArgumentException("Product has Manifest Items, can not delete.");
+            }
+
+            //Test to see if our product has any children (ICollections)
+            if (_context.Products.Any(prod => prod.OrderDetails.Count > 0 &&
+                                              prod.ProductID == product.ProductID))
+            {
+                throw new ArgumentException("Product has Order Details, can not delete.");
+            }
+
             return _context.SaveChanges();
         }
 
