@@ -127,6 +127,17 @@ namespace WestWindSystem.BLL
             //Return the number of records updated
             return _context.SaveChanges();
         }
+
+        public int DiscontinueProduct(Product product)
+        {
+            return 0;
+        }
+
+        public int ActivateProduct(Product product)
+        {
+            return 0;
+        }
+
         #endregion
 
 
