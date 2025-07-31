@@ -1,0 +1,198 @@
+﻿@page "/crudcomplete"
+
+@using BusSystem.Entities
+@using BusSystem.BLL
+@inject IJSRuntime JSRunTime;
+
+@rendermode InteractiveServer
+
+<PageTitle>Bus Route CRUD</PageTitle>
+
+<h1>Bus Route CRUD</h1>
+
+<!-- area to feedback messages-->
+@if (FeedbackMsg.Length > 0)
+{
+    <div class="alert alert-info">
+        <p>@FeedbackMsg</p>
+    </div>
+}
+<!-- area to error messages-->
+@if (Errors.Count > 0)
+{
+    <div class="alert alert-danger">
+        <p>Please fix the following issues:</p>
+        <ul>
+            @foreach (var error in Errors)
+            {
+                <li>@error</li>
+            }
+        </ul>
+    </div>
+}
+
+@*TODO: Create your EditForm here. It should include validation for DataAnnotation from the Entities as well as
+    ValidationMessages and validation for the Save button. 
+*@
+
+<EditForm EditContext="@_EditContext">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div>
+        <label for="routenum">Route Number</label>
+        <InputText id="routenum" @bind-Value="NewRoute.RouteNumber" placeholder="R0000" />
+        <ValidationMessage For="@(() => NewRoute.RouteNumber)" />
+    </div>
+    <div>
+        <label for="busnum">Bus Number</label>
+        <InputText id="busnum" @bind-Value="NewRoute.BusNumber" placeholder="B0000" />
+        <ValidationMessage For="@(() => NewRoute.BusNumber)" />
+    </div>
+    <div>
+        <label for="capacity">Bus Capacity</label>
+        <InputNumber id="capacity" @bind-Value="NewRoute.Capacity" placeholder="0" />
+        <ValidationMessage For="@(() => NewRoute.Capacity)" />
+    </div>
+    <div>
+        <label for="fare">Bus Fare</label>
+        <InputNumber id="fare" @bind-Value="NewRoute.Fare" placeholder="0.00" />
+        <ValidationMessage For="@(() => NewRoute.Fare)" />
+    </div>
+</EditForm>
+
+<div>
+    <button type="submit" class="btn btn-outline-primary rounded-pill"
+    @onclick="OnAdd">
+        Save
+    </button>
+    <button type="submit" class="btn btn-outline-secondary rounded-pill"
+    @onclick="OnClear">
+        Clear
+    </button>
+    <button type="submit" class="btn btn-outline-secondary rounded-pill"
+    @onclick="GoToQuery">
+        Go to query
+    </button>
+</div>
+
+@code {
+    private string FeedbackMsg = String.Empty;
+    private List<string> Errors = new List<string>();
+
+    private EditContext _EditContext;
+    private ValidationMessageStore _ValidationMessageStore;
+
+    private Route NewRoute = new();
+
+    [Inject]
+    private RouteServicesComplete _RouteServicesComplete { get; set; }
+
+    [Inject]
+    protected NavigationManager _NavigationManager { get; set; }
+
+    protected override void OnInitialized()
+    {
+        try
+        {
+            _EditContext = new EditContext(NewRoute);
+            _ValidationMessageStore = new ValidationMessageStore(_EditContext);
+        }
+        catch (Exception ex)
+        {
+            Errors.Add($"System Error: {ex.Message}");
+        }
+
+        base.OnInitialized();
+    }
+    private void OnAdd()
+    {
+        Clear();
+
+        if(_EditContext.Validate())
+        {
+            if (NewRoute.Capacity <= 0)
+            {
+                _ValidationMessageStore.Add(_EditContext.Field(nameof(NewRoute.Capacity)), "Capacity can not be <= 0");
+            }
+
+            if (NewRoute.Fare <= 0)
+            {
+                _ValidationMessageStore.Add(_EditContext.Field(nameof(NewRoute.Fare)), "Fare can not be <= 0");
+            }
+
+            if (NewRoute.RouteNumber[0] != 'R')
+            {
+                _ValidationMessageStore.Add(_EditContext.Field(nameof(NewRoute.RouteNumber)), "Route Numbers must start with 'R'");
+            }
+
+            if (NewRoute.BusNumber[0] != 'B')
+            {
+                _ValidationMessageStore.Add(_EditContext.Field(nameof(NewRoute.RouteNumber)), "Bus Numbers must start with 'B'");
+            }
+
+            if(_EditContext.GetValidationMessages().Any())
+            {
+                _EditContext.NotifyValidationStateChanged();
+            }
+            else
+            {
+                try
+                {
+                    NewRoute.RouteID = 0;
+                    int NewRouteID = _RouteServicesComplete.AddRoute(NewRoute);
+
+                    FeedbackMsg = $"Route with ID: {NewRouteID} has been added.";
+                }
+                catch (ArgumentNullException ex)
+                {
+                    Errors.Add($"Save Error: {GetInnerException(ex).Message}");
+                }
+                catch (ArgumentException ex)
+                {
+                    Errors.Add($"Save Error: {GetInnerException(ex).Message}");
+                }
+                catch (Exception ex)
+                {
+                    Errors.Add($"Save Error: {GetInnerException(ex).Message}");
+                }
+            }
+        }
+    }
+    private async Task OnClear()
+    {
+        string message = "Unsaved data will be lost. Do you wish to continue?";
+        if (await JSRunTime.InvokeAsync<bool>("confirm", message))
+        {
+            Clear();
+
+            NewRoute = new();
+
+            //remember to recreate the instance of the editcontext
+            _EditContext = new EditContext(NewRoute);
+            _ValidationMessageStore = new ValidationMessageStore(_EditContext);
+        }
+    }
+    private async Task GoToQuery()
+    {
+        string message = "Unsaved data will be lost. Do you wish to continue?";
+        if (await JSRunTime.InvokeAsync<bool>("confirm", message))
+        {
+            _NavigationManager.NavigateTo("./query");
+        }
+    }
+
+    private void Clear()
+    {
+        FeedbackMsg = String.Empty;
+        Errors.Clear();
+        _ValidationMessageStore.Clear();
+    }
+
+    private Exception GetInnerException(Exception ex)
+    {
+        while (ex.InnerException != null)
+            ex = ex.InnerException;
+        return ex;
+    }
+}

@@ -1,0 +1,96 @@
+﻿@page "/crud"
+@using BusSystem.Entities
+@using BusSystem.BLL
+
+@rendermode InteractiveServer
+
+<PageTitle>Bus Route CRUD</PageTitle>
+
+<h1>Bus Route CRUD</h1>
+
+<!-- area to feedback messages-->
+@if (feedback.Length > 0)
+{
+    <div class="alert alert-info">
+        <p>@feedback</p>
+    </div>
+}
+<!-- area to error messages-->
+@if (errors.Count > 0)
+{
+    <div class="alert alert-danger">
+        <p>Please fix the following issues:</p>
+        <ul>
+            @foreach (var error in errors)
+            {
+                <li>@error</li>
+            }
+        </ul>
+    </div>
+}
+
+@*TODO: Create your EditForm here. It should include validation for DataAnnotation from the Entities as well as
+    ValidationMessages and validation for the Save button. 
+*@
+
+@*TODO: Add a Clear button and Go To Querry button. Both should prompt the user with a popup before working.
+    Use a return type of Task instead of Void to get the buttons to work the first time.
+*@
+
+@code {
+    private string feedback = "";
+    private List<string> errors = new List<string>();
+
+    //TODO: Create all necessary variables and initialize in OnInitialize
+
+
+
+    [Inject]
+    private RouteServices _teamServices { get; set; }
+
+    [Inject]
+    protected NavigationManager _navigationManager { get; set; }
+
+    private Exception GetInnerException(Exception ex)
+    {
+        while (ex.InnerException != null)
+            ex = ex.InnerException;
+        return ex;
+    }
+
+    protected override void OnInitialized()
+    {
+        try
+        {
+            //TODO: Initialize form and needed variables
+
+        }
+        catch (Exception ex)
+        {
+            errors.Add($"System Error: {ex.Message}");
+        }
+
+        base.OnInitialized();
+    }
+    private void OnAdd()
+    {
+        //TODO:
+        // Implement your Add logic and validation here.
+        // Error messages should be displayed as should successful feedback.
+
+    }
+    private async Task OnClear()
+    {
+        //TODO:
+        // Clear the form with appropriate user prompts.
+
+
+    }
+    private async Task OnQuery()
+    {
+        //TODO:
+        // Return to the qurey page with appropriate user prompts.
+
+
+    }
+}

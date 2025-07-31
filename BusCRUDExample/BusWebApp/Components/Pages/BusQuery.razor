@@ -1,0 +1,97 @@
+﻿@page "/query"
+<PageTitle>Bus Routes</PageTitle>
+
+@using BusSystem.BLL;
+@using BusSystem.Entities;
+
+
+<h2>Current Bus Routes</h2>
+
+<!-- area to feedback messages-->
+@if (feedback.Length > 0)
+{
+    <div class="alert alert-info">
+        <p>@feedback</p>
+    </div>
+}
+<!-- area to error messages-->
+@if (errors.Count > 0)
+{
+    <div class="alert alert-danger">
+        <p>Please fix the following issues:</p>
+        <ul>
+            @foreach (var error in errors)
+            {
+                <li>@error</li>
+            }
+        </ul>
+    </div>
+}
+<br />
+<div class="row">
+    <div class="col-md-12 text-center">
+        <button type="submit" class="btn btn-outline-info rounded-pill">
+            <NavLink href="crud">New Route Creation</NavLink>
+        </button>
+    </div>
+</div>
+<br />
+<div class="row">
+    @if (RouteList.Count > 0)
+    {
+        <div class="offset-2 col-md-8 overflow-scroll" style="height:450px;">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Route Number</th>
+                        <th>Bus Number</th>
+                        <th>Capacity</th>
+                        <th>Fare</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in RouteList)
+                    {
+                        <tr>
+                            <td>@item.RouteID</td>
+                            <td>@item.RouteNumber</td>
+                            <td>@item.BusNumber</td>
+                            <td>@item.Capacity</td>
+                            <td>@item.Fare.ToString("C")</td> @*The "C" will format the double as currency.*@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <p> No Routes found</p>
+    }
+</div>
+@code {
+    private string feedback = "";
+    private List<string> errors = new List<string>();
+
+
+    [Inject]
+    private RouteServices _RouteServices { get; set; }
+    
+    private List<Route> RouteList = new List<Route>();
+
+    protected override void OnInitialized()
+    {
+        try
+        {
+
+            RouteList = _RouteServices.GetRoutes();
+        }
+        catch (Exception ex)
+        {
+            errors.Add($"System Error: {ex.Message}");
+        }
+
+        base.OnInitialized();
+    }
+}
